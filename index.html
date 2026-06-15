@@ -4,175 +4,495 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>inPátio Guest House · Reservas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --ink:#2b2622; --muted:#7c7268; --line:#e8e1d6; --bg:#f7f3ec; --card:#fffdf9;
-    --stone:#9a6a3c; --stone2:#7d5430; --azul:#2f5d86; --ok:#2f7d52; --okbg:#e9f5ee;
-    --shadow:0 18px 50px rgba(40,30,20,.10);
-  }
-  *{box-sizing:border-box}
-  body{margin:0;font-family:"Segoe UI",-apple-system,Helvetica,Arial,sans-serif;color:var(--ink);
-       background:var(--bg);line-height:1.5;-webkit-font-smoothing:antialiased}
-  .demo-tag{position:fixed;top:10px;right:10px;background:#2b2622;color:#fff;font-size:11px;
-       letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;border-radius:999px;opacity:.85;z-index:20}
-  header.top{display:flex;align-items:center;justify-content:space-between;
-       padding:18px 26px;border-bottom:1px solid var(--line);background:var(--card)}
-  .brand{display:flex;align-items:baseline;gap:10px}
-  .brand b{font-size:22px;letter-spacing:.04em;font-weight:800}
-  .brand b span{color:var(--stone)}
-  .brand small{color:var(--muted);font-size:12px;letter-spacing:.18em;text-transform:uppercase}
-  nav a{color:var(--muted);text-decoration:none;margin-left:20px;font-size:14px}
-  nav a.active{color:var(--ink);font-weight:600;border-bottom:2px solid var(--stone);padding-bottom:4px}
-  .hero{padding:30px 26px 6px;max-width:1060px;margin:0 auto}
-  .hero h1{font-size:29px;margin:0 0 4px;letter-spacing:-.01em}
-  .hero p{color:var(--muted);margin:0;font-size:15px}
-  .trust{max-width:1060px;margin:12px auto 0;padding:0 26px;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
-  .trust .pill{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);
-       border-radius:999px;padding:7px 13px;font-size:13px;color:var(--ink);box-shadow:var(--shadow)}
-  .trust .pill b{color:var(--azul)}
-  .wrap{max-width:1060px;margin:0 auto;padding:18px 26px 60px;display:grid;
-       grid-template-columns:1fr 340px;gap:26px;align-items:start}
-  .searchbar{grid-column:1 / -1;display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;
-       background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow)}
-  .field{display:flex;flex-direction:column;gap:5px}
-  .field label{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:700}
-  .field input,.field select{border:1px solid var(--line);border-radius:10px;padding:11px 12px;font-size:15px;
-       background:#fff;color:var(--ink);min-width:150px}
-  .btn{background:var(--stone);color:#fff;border:0;border-radius:10px;padding:12px 22px;font-size:15px;
-       font-weight:700;cursor:pointer;letter-spacing:.02em}
-  .btn:hover{background:var(--stone2)}
-  .nights{color:var(--muted);font-size:13px;margin-top:6px}
-  .rooms{display:flex;flex-direction:column;gap:16px}
-  .room{display:grid;grid-template-columns:190px 1fr auto;gap:16px;background:var(--card);
-       border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:var(--shadow)}
-  .room .ph{border-radius:12px;min-height:140px;background-size:cover;background-position:center;
-       background-color:#b89e80;background-image:linear-gradient(135deg,#cbb89c,#8f6e49)}
-  .room h3{margin:2px 0 4px;font-size:18px}
-  .room .feat{color:var(--muted);font-size:13px;margin:0 0 6px}
-  .room .feat span{display:inline-block;margin-right:10px;white-space:nowrap}
-  .room .chip{display:inline-block;font-size:11px;color:var(--ok);background:var(--okbg);border-radius:6px;padding:2px 7px;margin-top:4px}
-  .price{text-align:right;min-width:140px;display:flex;flex-direction:column;justify-content:space-between;gap:8px}
-  .price .amt{font-size:22px;font-weight:800}
-  .price .amt small{font-size:12px;color:var(--muted);font-weight:600}
-  .price .avail{font-size:12px;color:var(--ok);font-weight:600}
-  .pick{background:#fff;border:1.5px solid var(--stone);color:var(--stone2);border-radius:9px;
-       padding:9px 14px;font-weight:700;cursor:pointer;font-size:14px}
-  .pick:hover{background:var(--stone);color:#fff}
-  .panel{position:sticky;top:18px;background:var(--card);border:1px solid var(--line);
-       border-radius:16px;padding:18px;box-shadow:var(--shadow)}
-  .panel h4{margin:0 0 12px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-  .panel .row{display:flex;justify-content:space-between;font-size:14px;margin:7px 0;color:var(--ink)}
-  .panel .row.total{border-top:1px solid var(--line);margin-top:12px;padding-top:12px;font-weight:800;font-size:17px}
-  .panel .deposit{font-size:12px;color:var(--muted);margin-top:4px}
-  .pays{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
-  .pays span{font-size:10px;font-weight:800;letter-spacing:.04em;border:1px solid var(--line);border-radius:6px;
-       padding:4px 7px;color:#555;background:#fff}
-  .mbway{color:#e2001a;border-color:#f3c2c8}
-  .confirm{width:100%;margin-top:14px;background:var(--stone);color:#fff;border:0;border-radius:11px;
-       padding:14px;font-size:15px;font-weight:800;cursor:pointer}
-  .secure{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:12px;margin-top:10px;justify-content:center}
-  .ok{display:none;margin-top:14px;background:var(--okbg);border:1px solid #bfe3cd;border-radius:11px;
-       padding:12px 14px;color:#225c3c;font-size:14px}
-  .ok.show{display:block}
-  .ok b{display:block;margin-bottom:3px}
-  footer{max-width:1060px;margin:0 auto;padding:0 26px 40px;color:var(--muted);font-size:12px;text-align:center}
-  @media(max-width:820px){
-    .wrap{grid-template-columns:1fr}
-    .room{grid-template-columns:120px 1fr}
-    .price{grid-column:1 / -1;flex-direction:row;align-items:center;justify-content:space-between;text-align:left}
-    nav{display:none}
-  }
+:root{
+  --bg:#f7f2ea; --bg-alt:#f1eadd; --surface:#fcfaf5; --card:#fffdf9; --card-warm:#fbf7f0;
+  --ink:#221a14; --ink-soft:#3a322b; --muted:#6e655c; --muted2:#948a80; --line:#e3dace; --line2:#c9bfb0;
+  --stone:#a69c95; --stone-deep:#57534d; --wood:#463827;
+  --terra:#8a5a45; --terra-deep:#6e4434; --terra-tint:#efe3dc;
+  --azu:#5e748a; --azu-light:#cfdae5; --azu-deep:#3c4f63;
+  --gold:#9a7b3f; --success:#4f6b4a; --danger:#9a4a3a;
+  --r-sm:6px; --r-md:10px; --r-lg:14px; --r-xl:20px;
+  --sh-xs:0 1px 2px rgba(34,26,20,.05); --sh-sm:0 2px 8px rgba(34,26,20,.06);
+  --sh-md:0 6px 20px rgba(34,26,20,.08); --sh-lg:0 16px 40px rgba(34,26,20,.12);
+  --fdisp:'Cormorant Garamond',Georgia,serif; --fbody:'Inter',system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif;
+  --azu-tile:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cg fill='none' stroke='%235e748a' stroke-width='1.1'%3E%3Cpath d='M24 6 L42 24 L24 42 L6 24 Z'/%3E%3Cpath d='M24 14 L34 24 L24 34 L14 24 Z'/%3E%3Ccircle cx='24' cy='24' r='2.4' fill='%235e748a' stroke='none'/%3E%3Cpath d='M0 0 L8 0 L0 8 Z M48 0 L40 0 L48 8 Z M0 48 L8 48 L0 40 Z M48 48 L40 48 L48 40 Z' fill='%235e748a' stroke='none' opacity='.5'/%3E%3C/g%3E%3C/svg%3E");
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--fbody);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--fdisp);color:var(--ink);font-weight:600;margin:0}
+h1{font-weight:500;letter-spacing:-.01em}
+p{margin:0 0 14px}
+a{color:var(--terra);text-decoration:none}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+.eyebrow{font-family:var(--fbody);font-weight:600;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.demo-tag{position:fixed;top:12px;right:12px;z-index:200;background:var(--ink);color:#fff;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:6px 11px;border-radius:999px;opacity:.85}
+.btn{display:inline-block;border:0;border-radius:var(--r-sm);font-family:var(--fbody);font-weight:600;font-size:15px;cursor:pointer;padding:13px 26px;transition:background .2s,transform .2s,box-shadow .2s;letter-spacing:.01em}
+.btn-primary{background:var(--terra);color:#fff;box-shadow:var(--sh-xs)}
+.btn-primary:hover{background:var(--terra-deep);transform:translateY(-1px);box-shadow:var(--sh-sm)}
+.btn-azu{background:var(--azu);color:#fff}
+.btn-azu:hover{background:var(--azu-deep)}
+.btn-sec{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.btn-sec:hover{background:var(--ink);color:var(--surface)}
+.btn-ghost{background:transparent;color:var(--terra);text-decoration:underline;text-underline-offset:4px;padding:10px 4px}
+/* nav */
+nav.top{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(252,250,245,.92);backdrop-filter:blur(8px);border-bottom:1px solid transparent;transition:padding .25s,box-shadow .25s,border-color .25s}
+nav.top.shrink{box-shadow:var(--sh-sm);border-color:var(--line)}
+.navin{max-width:1160px;margin:0 auto;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;transition:padding .25s}
+nav.top.shrink .navin{padding:11px 24px}
+.logo{display:flex;align-items:baseline;gap:9px;font-family:var(--fdisp);font-weight:600;font-size:25px;color:var(--ink)}
+.logo span{color:var(--terra)}
+.logo small{font-family:var(--fbody);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.navlinks{display:flex;align-items:center;gap:22px}
+.navlinks a{color:var(--ink-soft);font-size:14.5px;font-weight:500}
+.navlinks a:hover{color:var(--terra)}
+.lang{display:flex;border:1px solid var(--line2);border-radius:var(--r-sm);overflow:hidden;font-size:12px;font-weight:600}
+.lang button{border:0;background:transparent;color:var(--muted);padding:6px 9px;cursor:pointer}
+.lang button.on{background:var(--ink);color:#fff}
+.navcta{padding:10px 18px;font-size:14px}
+.burger{display:none;border:0;background:transparent;font-size:24px;color:var(--ink);cursor:pointer}
+/* hero */
+.hero{position:relative;min-height:88vh;display:flex;align-items:flex-end;color:#fff;
+  background:linear-gradient(180deg,rgba(34,26,20,.15),rgba(34,26,20,.62)),url('https://inpatio.pt/assets/images/background/homepage.jpg') center/cover no-repeat;}
+.heroin{max-width:1160px;margin:0 auto;padding:0 24px 54px;width:100%}
+.hero .eyebrow{color:var(--azu-light)}
+.hero h1{color:#fff;font-size:clamp(2.75rem,5.4vw,4.4rem);max-width:14ch;text-shadow:0 2px 24px rgba(0,0,0,.3)}
+.hero .sub{color:#f3ece2;font-size:19px;max-width:46ch;margin:12px 0 0;text-shadow:0 1px 12px rgba(0,0,0,.3)}
+.herobadges{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.hb{display:inline-flex;align-items:center;gap:7px;background:rgba(252,250,245,.16);border:1px solid rgba(255,255,255,.28);
+  border-radius:999px;padding:7px 14px;font-size:13.5px;font-weight:500;backdrop-filter:blur(4px)}
+/* search widget */
+.search{max-width:1010px;margin:-44px auto 0;position:relative;z-index:5;background:var(--surface);
+  border:1px solid var(--line);border-radius:var(--r-xl);box-shadow:var(--sh-lg);padding:20px 22px}
+.search .lab{font-family:var(--fdisp);font-size:21px;margin-bottom:14px}
+.searchrow{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end}
+.fld{display:flex;flex-direction:column;gap:6px;flex:1;min-width:150px}
+.fld label{font-size:14px;font-weight:500;color:var(--muted)}
+.fld input,.fld select{background:var(--card);border:1px solid var(--line2);border-radius:var(--r-sm);padding:12px 13px;font-family:var(--fbody);font-size:16px;color:var(--ink);transition:border-color .2s,box-shadow .2s}
+.fld input:focus,.fld select:focus{outline:0;border-color:var(--azu);box-shadow:0 0 0 3px rgba(94,116,138,.22)}
+.helper{font-size:13px;color:var(--muted);margin-top:10px}
+/* sections */
+section.blk{padding:78px 0}
+section.blk.alt{background:var(--bg-alt)}
+.shead{text-align:center;max-width:62ch;margin:0 auto 38px}
+.shead h2{font-size:clamp(1.9rem,3.2vw,2.6rem);margin:8px 0 0}
+.shead p{color:var(--muted);margin-top:10px}
+.az-divider{height:58px;background:var(--bg) var(--azu-tile);background-size:48px 48px;
+  -webkit-mask:linear-gradient(90deg,transparent,#000 22%,#000 78%,transparent);mask:linear-gradient(90deg,transparent,#000 22%,#000 78%,transparent);opacity:.55}
+/* rooms */
+.rooms{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.room{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-xs);transition:box-shadow .25s,transform .25s}
+.room:hover{box-shadow:var(--sh-md);transform:translateY(-2px)}
+.room .img{position:relative;aspect-ratio:4/3;overflow:hidden;cursor:pointer}
+.room .img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.room:hover .img img{transform:scale(1.04)}
+.room .tag{position:absolute;top:12px;left:12px;background:rgba(252,250,245,.92);color:var(--ink);font-size:11px;
+  font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:var(--r-sm)}
+.room .gal{position:absolute;bottom:12px;right:12px;background:rgba(34,26,20,.55);color:#fff;font-size:12px;
+  padding:5px 10px;border-radius:var(--r-sm);backdrop-filter:blur(3px)}
+.room .bd{padding:18px 20px}
+.room h3{font-size:1.5rem;margin-bottom:6px}
+.specs{display:flex;flex-wrap:wrap;gap:7px;margin:8px 0 10px}
+.specs span{font-size:12.5px;color:var(--ink-soft);background:var(--card-warm);border:1px solid var(--line);border-radius:var(--r-sm);padding:4px 9px}
+.room .foot{display:flex;align-items:flex-end;justify-content:space-between;margin-top:14px}
+.room .price{font-family:var(--fdisp);color:var(--terra);font-size:1.5rem;font-weight:600}
+.room .price small{font-family:var(--fbody);font-size:13px;color:var(--muted);font-weight:400}
+.chip{display:inline-block;font-size:12px;color:var(--success);background:#eaf0e8;border-radius:var(--r-sm);padding:3px 8px;margin-right:6px}
+/* incentive */
+.incentive{max-width:1160px;margin:34px auto 0;padding:0 24px}
+.incard{background:var(--terra-tint);border:1px solid #e4cfc4;border-radius:var(--r-lg);padding:22px 26px;display:flex;gap:16px;align-items:center}
+.incard .ic{font-size:30px}
+.incard h3{font-size:1.3rem;color:var(--terra-deep)}
+.incard p{margin:4px 0 0;color:var(--ink-soft);font-size:15px}
+/* amenities */
+.amgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.amcol h4{font-family:var(--fbody);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.amcol ul{list-style:none;margin:0;padding:0}
+.amcol li{padding:7px 0;border-bottom:1px solid var(--line);font-size:15px;color:var(--ink-soft);display:flex;gap:9px;align-items:center}
+.amcol li::before{content:"✓";color:var(--gold);font-weight:700}
+/* location + reviews */
+.loc{display:grid;grid-template-columns:1.1fr 1fr;gap:30px;align-items:center}
+.loc .map{aspect-ratio:16/11;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);box-shadow:var(--sh-sm)}
+.loc .map iframe{width:100%;height:100%;border:0;filter:saturate(.9)}
+.near{list-style:none;padding:0;margin:14px 0 0}
+.near li{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px dashed var(--line);font-size:15px}
+.near li b{color:var(--muted);font-weight:500}
+.revgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.rev{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px 22px;box-shadow:var(--sh-xs)}
+.rev .stars{color:var(--gold);font-size:15px;letter-spacing:2px}
+.rev blockquote{font-family:var(--fdisp);font-style:italic;font-size:1.2rem;line-height:1.4;color:var(--ink);margin:10px 0 14px}
+.rev .by{font-size:13px;color:var(--muted)}
+.revtop{text-align:center;margin-bottom:26px}
+.revtop .score{font-family:var(--fdisp);font-size:3rem;color:var(--terra);line-height:1}
+/* faq */
+.faqlist{max-width:780px;margin:0 auto}
+.faq{border-bottom:1px solid var(--line)}
+.faq button{width:100%;text-align:left;background:none;border:0;padding:18px 4px;font-family:var(--fbody);font-size:17px;font-weight:600;color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;gap:12px;align-items:center}
+.faq .ans{max-height:0;overflow:hidden;transition:max-height .3s ease;color:var(--ink-soft);font-size:15.5px}
+.faq.open .ans{max-height:240px}
+.faq.open button .ar{transform:rotate(45deg)}
+.faq .ar{color:var(--terra);font-size:22px;transition:transform .3s;font-weight:300}
+/* footer */
+.foot{background:var(--ink);color:#e8e1d6;padding:54px 0 26px;position:relative}
+.foot::before{content:"";position:absolute;top:0;left:0;right:0;height:58px;background:var(--azu-tile);background-size:48px 48px;opacity:.06}
+.footgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px}
+.foot h4{font-family:var(--fbody);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--stone);margin:0 0 12px}
+.foot a{color:#e8e1d6;font-size:15px;display:block;margin:7px 0}
+.foot a:hover{color:#fff}
+.footbrand{font-family:var(--fdisp);font-size:1.6rem;margin-bottom:8px}
+.footbrand span{color:var(--terra)}
+.copy{border-top:1px solid #3a322b;margin-top:34px;padding-top:18px;font-size:13px;color:var(--stone);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+/* sticky mobile book bar */
+.mbar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:90;background:var(--surface);border-top:1px solid var(--line);
+  padding:11px 16px;align-items:center;justify-content:space-between;box-shadow:0 -6px 20px rgba(34,26,20,.08)}
+.mbar .mp{font-family:var(--fdisp);color:var(--terra);font-size:1.2rem;font-weight:600}
+.mbar .mp small{font-family:var(--fbody);font-size:12px;color:var(--muted);font-weight:400}
+/* booking modal */
+.modal{display:none;position:fixed;inset:0;z-index:300;background:rgba(34,26,20,.5);backdrop-filter:blur(3px);overflow-y:auto;padding:24px}
+.modal.show{display:flex;align-items:flex-start;justify-content:center}
+.sheet{background:var(--bg);border-radius:var(--r-xl);max-width:760px;width:100%;margin:24px auto;box-shadow:var(--sh-lg);overflow:hidden}
+.sheethd{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;background:var(--surface);border-bottom:1px solid var(--line)}
+.sheethd h3{font-size:1.4rem}
+.x{border:0;background:transparent;font-size:26px;color:var(--muted);cursor:pointer;line-height:1}
+.steps{display:flex;gap:0;padding:16px 24px 0}
+.stp{flex:1;text-align:center;font-size:12.5px;color:var(--muted2);position:relative;padding-bottom:14px;font-weight:600}
+.stp .n{display:inline-flex;width:26px;height:26px;border-radius:999px;background:var(--line);color:var(--muted);align-items:center;justify-content:center;font-size:13px;margin-bottom:6px}
+.stp.on{color:var(--ink)} .stp.on .n{background:var(--terra);color:#fff}
+.stp.done .n{background:var(--success);color:#fff}
+.stp::after{content:"";position:absolute;top:13px;left:60%;width:80%;height:2px;background:var(--line)}
+.stp:last-child::after{display:none}
+.stp.done::after{background:var(--success)}
+.sbody{padding:22px 24px}
+.step{display:none} .step.on{display:block}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.rowsel{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--line2);border-radius:var(--r-md);padding:14px 16px;margin-bottom:12px;cursor:pointer;transition:border-color .2s,background .2s}
+.rowsel:hover{border-color:var(--stone)}
+.rowsel.sel{border-color:var(--terra);background:var(--terra-tint)}
+.rowsel .rp{font-family:var(--fdisp);color:var(--terra);font-size:1.3rem;font-weight:600}
+.paytabs{display:flex;gap:8px;margin:6px 0 14px}
+.paytab{flex:1;text-align:center;border:1px solid var(--line2);border-radius:var(--r-sm);padding:11px;cursor:pointer;font-size:14px;font-weight:600;color:var(--muted)}
+.paytab.on{border-color:var(--terra);background:var(--terra-tint);color:var(--terra-deep)}
+.summary{background:var(--card-warm);border:1px solid var(--line);border-radius:var(--r-md);padding:14px 16px;margin-top:6px}
+.summary .r{display:flex;justify-content:space-between;font-size:14.5px;margin:6px 0}
+.summary .r.tot{border-top:1px solid var(--line);margin-top:10px;padding-top:10px;font-weight:700;font-size:17px}
+.sfoot{display:flex;justify-content:space-between;gap:12px;padding:18px 24px;background:var(--surface);border-top:1px solid var(--line)}
+.pays{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.pays span{font-size:10px;font-weight:800;letter-spacing:.04em;border:1px solid var(--line);border-radius:var(--r-sm);padding:4px 7px;color:#555;background:#fff}
+.mbway{color:#e2001a;border-color:#f3c2c8}
+.done{text-align:center;padding:20px 10px}
+.tick{width:74px;height:74px;border-radius:999px;background:#eaf0e8;color:var(--success);display:flex;align-items:center;justify-content:center;
+  font-size:38px;margin:0 auto 16px;animation:pop .4s ease}
+@keyframes pop{0%{transform:scale(.4);opacity:0}60%{transform:scale(1.12)}100%{transform:scale(1);opacity:1}}
+.ref{display:inline-block;font-family:var(--fdisp);font-size:1.5rem;color:var(--terra);background:var(--card);border:1px dashed var(--terra);border-radius:var(--r-sm);padding:8px 18px;margin:6px 0 14px}
+/* lightbox */
+.lb{display:none;position:fixed;inset:0;z-index:400;background:rgba(20,15,11,.92);align-items:center;justify-content:center;padding:30px}
+.lb.show{display:flex}
+.lb img{max-width:90vw;max-height:84vh;border-radius:var(--r-md);box-shadow:var(--sh-lg)}
+.lb .x{position:absolute;top:18px;right:24px;color:#fff;font-size:34px}
+.lb .nav{position:absolute;top:50%;transform:translateY(-50%);color:#fff;font-size:42px;cursor:pointer;padding:10px;user-select:none}
+.lb .prev{left:14px}.lb .next{right:14px}
+/* reveal */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}*{scroll-behavior:auto}}
+/* responsive */
+@media(max-width:880px){
+  .navlinks a:not(.lang-wrap):not(.navcta){display:none}
+  .burger{display:block}
+  .rooms,.amgrid,.revgrid,.loc{grid-template-columns:1fr}
+  .footgrid{grid-template-columns:1fr 1fr}
+  .hero{min-height:74vh}
+  .mbar{display:flex}
+  body{padding-bottom:64px}
+  .grid2{grid-template-columns:1fr}
+  .search{margin-top:-30px}
+}
+@media(max-width:520px){ .footgrid{grid-template-columns:1fr} .navcta{display:none} }
 </style>
 </head>
 <body>
 <div class="demo-tag">Maquete Likwiid · demonstração</div>
-<header class="top">
-  <div class="brand"><b>in<span>Pátio</span></b><small>Guest House · Porto</small></div>
-  <nav><a href="#">Início</a><a href="#">Quartos</a><a href="#" class="active">Reservas</a><a href="#">Contactos</a></nav>
+
+<nav class="top" id="nav">
+  <div class="navin">
+    <div class="logo">in<span>Pátio</span> <small>Guest House</small></div>
+    <div class="navlinks">
+      <a href="#quartos">Quartos</a>
+      <a href="#comodidades">Comodidades</a>
+      <a href="#local">Localização</a>
+      <a href="#avaliacoes">Avaliações</a>
+      <a href="#faq">Perguntas</a>
+      <div class="lang"><button class="on">PT</button><button>EN</button></div>
+      <button class="btn btn-primary navcta" onclick="openBooking()">Reservar</button>
+    </div>
+    <button class="burger" onclick="document.querySelector('.navlinks').scrollIntoView()">☰</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="heroin">
+    <div class="eyebrow">Porto · Ribeira · Desde 2012</div>
+    <h1>Uma casa no coração da Ribeira</h1>
+    <p class="sub">Cinco quartos à volta de um pátio histórico, onde o Porto se vive devagar e se descansa de verdade.</p>
+    <div class="herobadges">
+      <span class="hb">⭐ 5.0 · 851 avaliações no TripAdvisor</span>
+      <span class="hb">🏆 N.º 1 das guest houses do Porto</span>
+      <span class="hb">✓ Melhor preço, reserva direta</span>
+    </div>
+  </div>
 </header>
 
-<section class="hero">
-  <h1>Reserve a sua estadia</h1>
-  <p>Quartos com conforto no coração do Porto. Escolha as datas e reserve em poucos passos.</p>
-</section>
-<div class="trust">
-  <span class="pill">⭐ <b>5.0</b> · 851 avaliações no TripAdvisor</span>
-  <span class="pill">🏆 N.º 1 das guest houses do Porto</span>
-  <span class="pill">✓ Melhor preço, reserva direta sem comissões</span>
-</div>
-
-<div class="wrap">
-  <div class="searchbar">
-    <div class="field"><label>Check-in</label><input type="date" id="ci" value="2026-07-10"></div>
-    <div class="field"><label>Check-out</label><input type="date" id="co" value="2026-07-13"></div>
-    <div class="field"><label>Hóspedes</label>
+<div class="search rv">
+  <div class="lab">Veja se há vaga para as suas datas</div>
+  <div class="searchrow">
+    <div class="fld"><label>Data de entrada</label><input type="date" id="ci" value="2026-07-10"></div>
+    <div class="fld"><label>Data de saída</label><input type="date" id="co" value="2026-07-13"></div>
+    <div class="fld"><label>Hóspedes</label>
       <select id="g"><option>1 adulto</option><option selected>2 adultos</option><option>2 adultos + 1 criança</option></select>
     </div>
-    <div>
-      <button class="btn" onclick="search()">Ver disponibilidade</button>
-      <div class="nights" id="nights">3 noites · 10 a 13 de julho</div>
-    </div>
+    <div class="fld" style="flex:0 0 auto"><label>&nbsp;</label><button class="btn btn-azu" onclick="openBooking()">Ver disponibilidade</button></div>
   </div>
-
-  <div class="rooms">
-    <div class="room">
-      <div class="ph" style="background-image:url('https://inpatio.pt/assets/images/room/1.jpg')"></div>
-      <div>
-        <h3>Quarto Duplo Standard</h3>
-        <p class="feat"><span>Pedra à vista e azulejo</span><span>Ar condicionado</span><span>Minibar</span><span>WC com piso radiante</span></p>
-        <span class="chip">Pequeno-almoço incluído</span>
-      </div>
-      <div class="price">
-        <div><div class="amt">135€ <small>/ noite</small></div><div class="avail">Disponível para as suas datas</div></div>
-        <button class="pick" onclick="pick('Standard',135)">Escolher</button>
-      </div>
-    </div>
-
-    <div class="room">
-      <div class="ph" style="background-image:url('https://inpatio.pt/assets/images/room/3.jpg')"></div>
-      <div>
-        <h3>Quarto Duplo ou Twin Superior</h3>
-        <p class="feat"><span>Vista pátio</span><span>Um pouco maior</span><span>Cama extra possível</span><span>Cofre</span></p>
-        <span class="chip">Pequeno-almoço incluído</span>
-      </div>
-      <div class="price">
-        <div><div class="amt">149€ <small>/ noite</small></div><div class="avail">Últimos 2 para estas datas</div></div>
-        <button class="pick" onclick="pick('Superior',149)">Escolher</button>
-      </div>
-    </div>
-  </div>
-
-  <aside class="panel">
-    <h4>A sua reserva</h4>
-    <div class="row"><span id="sumRoom">Quarto Superior</span><span id="sumNights">3 noites</span></div>
-    <div class="row"><span id="sumLine">149€ x 3 noites</span><span id="sumSub">447€</span></div>
-    <div class="row"><span>Pequeno-almoço</span><span style="color:var(--ok)">Incluído</span></div>
-    <div class="row total"><span>Total</span><span id="sumTotal">447€</span></div>
-    <div class="deposit" id="dep">Sinal de 30% hoje (134€) · restante no check-in</div>
-    <button class="confirm" onclick="confirmBooking()">Confirmar e pagar sinal</button>
-    <div class="pays"><span class="mbway">MB WAY</span><span>VISA</span><span>Mastercard</span><span>Multibanco</span></div>
-    <div class="secure">🔒 Pagamento seguro · confirmação imediata</div>
-    <div class="ok" id="ok"><b>Reserva confirmada na hora ✓</b>Enviámos a confirmação por email. Sem espera e sem comissões de plataformas.</div>
-  </aside>
+  <div class="helper">Sem compromisso. Veja já os quartos livres e os preços para a sua estadia.</div>
 </div>
 
-<footer>inPátio Guest House · Pátio de São Salvador 22, Ribeira, Porto · maquete de demonstração criada pela Likwiid (conteúdo ilustrativo)</footer>
+<div class="incentive rv">
+  <div class="incard">
+    <div class="ic">🤝</div>
+    <div><h3>O melhor preço é sempre aqui</h3>
+    <p>Ao reservar diretamente connosco paga menos, sem comissões de intermediários, e a sua mensagem chega a quem o vai receber.</p></div>
+  </div>
+</div>
+
+<section class="blk" id="quartos">
+  <div class="wrap">
+    <div class="shead rv"><div class="eyebrow">Os nossos espaços</div><h2>Quartos</h2>
+      <p>Cinco quartos com design próprio, inspirados nos materiais tradicionais do Porto. Todos com casa de banho privativa e pequeno-almoço incluído.</p></div>
+    <div class="rooms">
+      <article class="room rv">
+        <div class="img" onclick="lightbox(['https://inpatio.pt/assets/images/room/1.jpg','https://inpatio.pt/assets/images/room/2.jpg','https://inpatio.pt/assets/images/gallery/2.jpg'],0)">
+          <img src="https://inpatio.pt/assets/images/room/1.jpg" alt="Quarto Duplo Standard">
+          <span class="tag">Duplo Standard</span><span class="gal">📷 Ver fotos</span></div>
+        <div class="bd">
+          <h3>Quarto Duplo Standard</h3>
+          <div class="specs"><span>Até 2 hóspedes</span><span>Cama de casal</span><span>Pedra e azulejo</span><span>Vista pátio</span></div>
+          <div><span class="chip">Pequeno-almoço incluído</span><span class="chip">Cancelamento gratuito</span></div>
+          <div class="foot"><div class="price">Desde 135€ <small>/ noite</small></div>
+            <button class="btn btn-primary" onclick="openBooking('Standard',135)">Reservar quarto</button></div>
+        </div>
+      </article>
+      <article class="room rv">
+        <div class="img" onclick="lightbox(['https://inpatio.pt/assets/images/room/3.jpg','https://inpatio.pt/assets/images/room/4.jpg','https://inpatio.pt/assets/images/gallery/4.jpg'],0)">
+          <img src="https://inpatio.pt/assets/images/room/3.jpg" alt="Quarto Duplo ou Twin Superior">
+          <span class="tag">Superior</span><span class="gal">📷 Ver fotos</span></div>
+        <div class="bd">
+          <h3>Quarto Duplo ou Twin Superior</h3>
+          <div class="specs"><span>Até 3 hóspedes</span><span>Um pouco maior</span><span>Cama extra possível</span><span>Piso radiante</span></div>
+          <div><span class="chip">Pequeno-almoço incluído</span><span class="chip">Cancelamento gratuito</span></div>
+          <div class="foot"><div class="price">Desde 149€ <small>/ noite</small></div>
+            <button class="btn btn-primary" onclick="openBooking('Superior',149)">Reservar quarto</button></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="az-divider"></div>
+
+<section class="blk alt" id="comodidades">
+  <div class="wrap">
+    <div class="shead rv"><div class="eyebrow">A sua estadia</div><h2>Comodidades</h2>
+      <p>Tudo o que precisa para uns dias tranquilos no centro histórico do Porto.</p></div>
+    <div class="amgrid">
+      <div class="amcol rv"><h4>No quarto</h4><ul>
+        <li>Wi-Fi gratuito</li><li>Ar condicionado e aquecimento</li><li>TV de ecrã plano</li><li>Minibar e cofre</li><li>WC privativo com piso radiante</li></ul></div>
+      <div class="amcol rv"><h4>Na casa</h4><ul>
+        <li>Pequeno-almoço incluído</li><li>Pátio histórico e zona de estar</li><li>Sala comum acolhedora</li><li>Edifício restaurado do século XIX</li><li>Arrumação de bagagem</li></ul></div>
+      <div class="amcol rv"><h4>Serviços</h4><ul>
+        <li>Receção para o ajudar</li><li>Recomendações locais</li><li>Roupa de cama e toalhas incluídas</li><li>Check-in simples</li><li>No coração da Ribeira</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="blk" id="local">
+  <div class="wrap">
+    <div class="loc">
+      <div class="rv">
+        <div class="eyebrow">Onde estamos</div>
+        <h2 style="margin:8px 0 12px">Um pátio escondido, no centro de tudo</h2>
+        <p>Estamos numa rua calma do centro histórico, no Pátio de São Salvador, a poucos minutos a pé dos principais pontos do Porto. Um refúgio tranquilo, com tudo à mão.</p>
+        <ul class="near">
+          <li>Ribeira e Cais <b>5 min a pé</b></li>
+          <li>Sé do Porto <b>5 min a pé</b></li>
+          <li>Palácio da Bolsa <b>4 min a pé</b></li>
+          <li>Estação de São Bento <b>7 min a pé</b></li>
+          <li>Livraria Lello <b>12 min a pé</b></li>
+        </ul>
+      </div>
+      <div class="map rv">
+        <iframe loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-8.615%2C41.139%2C-8.605%2C41.144&layer=mapnik&marker=41.1419%2C-8.6108"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="blk alt" id="avaliacoes">
+  <div class="wrap">
+    <div class="revtop rv"><div class="score">5.0</div><div class="eyebrow" style="margin-top:6px">851 avaliações · N.º 1 das guest houses do Porto no TripAdvisor</div></div>
+    <div class="revgrid">
+      <div class="rev rv"><div class="stars">★★★★★</div><blockquote>Uma estadia perfeita no Porto. Quartos impecáveis e um acolhimento muito caloroso.</blockquote><div class="by">Hóspede · TripAdvisor</div></div>
+      <div class="rev rv"><div class="stars">★★★★★</div><blockquote>Escondido no centro do Porto, num pátio calmo e a poucos passos da Ribeira.</blockquote><div class="by">Hóspede · TripAdvisor</div></div>
+      <div class="rev rv"><div class="stars">★★★★★</div><blockquote>Simplesmente o melhor. Um dos melhores B&amp;B onde já ficámos.</blockquote><div class="by">Hóspede · TripAdvisor</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="blk" id="faq">
+  <div class="wrap">
+    <div class="shead rv"><div class="eyebrow">Antes de reservar</div><h2>Perguntas frequentes</h2></div>
+    <div class="faqlist rv">
+      <div class="faq"><button onclick="tog(this)">A que horas é o check-in e o check-out?<span class="ar">+</span></button><div class="ans"><p>O check-in é a partir das 15h00 e o check-out até às 11h00. Se chegar mais cedo, podemos guardar a sua bagagem.</p></div></div>
+      <div class="faq"><button onclick="tog(this)">O pequeno-almoço está incluído?<span class="ar">+</span></button><div class="ans"><p>Sim, o pequeno-almoço está incluído na tarifa e é servido na sala comum, com acesso ao pátio.</p></div></div>
+      <div class="faq"><button onclick="tog(this)">Há estacionamento?<span class="ar">+</span></button><div class="ans"><p>Como estamos no centro histórico, não temos estacionamento próprio, mas há parques públicos a poucos minutos a pé.</p></div></div>
+      <div class="faq"><button onclick="tog(this)">Posso cancelar a minha reserva?<span class="ar">+</span></button><div class="ans"><p>Sim. Nas tarifas com cancelamento gratuito pode cancelar sem custos até à data indicada na sua reserva.</p></div></div>
+      <div class="faq"><button onclick="tog(this)">Aceitam animais de estimação?<span class="ar">+</span></button><div class="ans"><p>Gostamos muito de animais, mas por respeito a todos os hóspedes só aceitamos casos especiais. Fale connosco antes de reservar.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="footgrid">
+      <div><div class="footbrand">in<span>Pátio</span> Guest House</div>
+        <p style="color:var(--stone);font-size:15px;max-width:38ch">Uma casa histórica de portas abertas, no coração da Ribeira, onde cada hóspede é recebido com cuidado.</p></div>
+      <div><h4>Contactos</h4>
+        <a>Pátio de São Salvador 22, Porto</a><a>+351 222 085 477</a><a>info@inpatio.pt</a></div>
+      <div><h4>Navegação</h4>
+        <a href="#quartos">Quartos</a><a href="#comodidades">Comodidades</a><a href="#avaliacoes">Avaliações</a><a href="#faq">Perguntas frequentes</a></div>
+    </div>
+    <div class="copy"><span>inPátio Guest House · Todos os direitos reservados</span><span>Maquete de demonstração criada pela Likwiid · conteúdo ilustrativo</span></div>
+  </div>
+</footer>
+
+<div class="mbar">
+  <div class="mp">Desde 135€ <small>/ noite</small></div>
+  <button class="btn btn-primary" onclick="openBooking()">Reservar</button>
+</div>
+
+<!-- booking modal -->
+<div class="modal" id="modal">
+  <div class="sheet">
+    <div class="sheethd"><h3>Reservar a sua estadia</h3><button class="x" onclick="closeBooking()">×</button></div>
+    <div class="steps">
+      <div class="stp on" id="st1"><div class="n">1</div>Datas e hóspedes</div>
+      <div class="stp" id="st2"><div class="n">2</div>Quarto e tarifa</div>
+      <div class="stp" id="st3"><div class="n">3</div>Dados e pagamento</div>
+    </div>
+    <div class="sbody">
+      <div class="step on" id="step1">
+        <div class="grid2">
+          <div class="fld"><label>Data de entrada</label><input type="date" id="mci" value="2026-07-10"></div>
+          <div class="fld"><label>Data de saída</label><input type="date" id="mco" value="2026-07-13"></div>
+        </div>
+        <div class="fld" style="margin-top:12px"><label>Hóspedes</label>
+          <select id="mg"><option>1 adulto</option><option selected>2 adultos</option><option>2 adultos + 1 criança</option></select></div>
+        <p class="helper" id="nightsNote" style="margin-top:14px">3 noites · 10 a 13 de julho</p>
+      </div>
+      <div class="step" id="step2">
+        <div class="rowsel sel" data-room="Standard" data-rate="135" onclick="selRoom(this)">
+          <div><b>Quarto Duplo Standard</b><div style="font-size:13px;color:var(--muted)">Pequeno-almoço incluído · cancelamento gratuito</div></div>
+          <div class="rp">135€<small style="font-family:var(--fbody);font-size:12px;color:var(--muted)"> /noite</small></div></div>
+        <div class="rowsel" data-room="Superior" data-rate="149" onclick="selRoom(this)">
+          <div><b>Quarto Duplo ou Twin Superior</b><div style="font-size:13px;color:var(--muted)">Um pouco maior · cama extra possível</div></div>
+          <div class="rp">149€<small style="font-family:var(--fbody);font-size:12px;color:var(--muted)"> /noite</small></div></div>
+        <div class="summary" id="sum2"></div>
+      </div>
+      <div class="step" id="step3">
+        <div class="grid2">
+          <div class="fld"><label>Nome</label><input id="fn" placeholder="O seu nome"></div>
+          <div class="fld"><label>Email</label><input id="fe" placeholder="o.seu@email.com"></div>
+        </div>
+        <div class="fld" style="margin-top:12px"><label>Telemóvel</label><input id="fp" placeholder="+351 ..."></div>
+        <p style="font-weight:600;margin:18px 0 6px">Pagamento</p>
+        <div class="paytabs">
+          <div class="paytab on" onclick="payTab(this)">MB WAY</div>
+          <div class="paytab" onclick="payTab(this)">Cartão</div>
+          <div class="paytab" onclick="payTab(this)">Multibanco</div>
+        </div>
+        <div class="fld"><label>Número de telemóvel MB WAY</label><input placeholder="+351 9.."></div>
+        <div class="summary" id="sum3" style="margin-top:14px"></div>
+        <div class="pays"><span class="mbway">MB WAY</span><span>VISA</span><span>Mastercard</span><span>Multibanco</span></div>
+        <p class="helper">🔒 Pagamento seguro. Para garantir a reserva é pedido um sinal de 30%, o restante é pago no check-in.</p>
+      </div>
+      <div class="step" id="step4">
+        <div class="done">
+          <div class="tick">✓</div>
+          <h3 style="font-size:1.7rem">Reserva confirmada. Está tudo tratado.</h3>
+          <p style="color:var(--muted);max-width:40ch;margin:8px auto 6px">Já temos o seu quarto à sua espera. Enviámos todos os detalhes para o seu email.</p>
+          <div class="ref" id="refOut">INP-2026-04821</div>
+          <div class="summary" id="sum4" style="text-align:left;max-width:380px;margin:8px auto 0"></div>
+        </div>
+      </div>
+    </div>
+    <div class="sfoot" id="sfoot">
+      <button class="btn btn-sec" id="backBtn" onclick="back()" style="visibility:hidden">Voltar</button>
+      <button class="btn btn-primary" id="nextBtn" onclick="next()">Continuar</button>
+    </div>
+  </div>
+</div>
+
+<!-- lightbox -->
+<div class="lb" id="lb">
+  <span class="x" onclick="closeLb()">×</span>
+  <span class="nav prev" onclick="lbStep(-1)">‹</span>
+  <img id="lbImg" src="" alt="">
+  <span class="nav next" onclick="lbStep(1)">›</span>
+</div>
 
 <script>
-  let cur={room:'Superior',rate:149,nights:3};
-  function calc(){
-    const sub=cur.rate*cur.nights;
-    document.getElementById('sumRoom').textContent='Quarto '+cur.room;
-    document.getElementById('sumNights').textContent=cur.nights+' noites';
-    document.getElementById('sumLine').textContent=cur.rate+'€ x '+cur.nights+' noites';
-    document.getElementById('sumSub').textContent=sub+'€';
-    document.getElementById('sumTotal').textContent=sub+'€';
-    document.getElementById('dep').textContent='Sinal de 30% hoje ('+Math.round(sub*0.3)+'€) · restante no check-in';
-  }
-  function pick(room,rate){cur.room=room;cur.rate=rate;calc();document.getElementById('ok').classList.remove('show');}
-  function search(){document.getElementById('nights').textContent='3 noites · 10 a 13 de julho';}
-  function confirmBooking(){document.getElementById('ok').classList.add('show');}
-  calc();
+// nav shrink + reveal
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('shrink',scrollY>40));
+const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+// faq
+function tog(b){const f=b.parentElement;f.classList.toggle('open')}
+// lang (demo)
+document.querySelectorAll('.lang button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.lang button').forEach(x=>x.classList.remove('on'));b.classList.add('on')});
+// lightbox
+let lbImgs=[],lbI=0;
+function lightbox(imgs,i){lbImgs=imgs;lbI=i;document.getElementById('lbImg').src=imgs[i];document.getElementById('lb').classList.add('show')}
+function lbStep(d){lbI=(lbI+d+lbImgs.length)%lbImgs.length;document.getElementById('lbImg').src=lbImgs[lbI]}
+function closeLb(){document.getElementById('lb').classList.remove('show')}
+// booking flow
+let cur={room:'Standard',rate:135,nights:3},step=1;
+function openBooking(room,rate){ if(room){cur.room=room;cur.rate=rate;} step=1; render(); document.getElementById('modal').classList.add('show'); }
+function closeBooking(){document.getElementById('modal').classList.remove('show')}
+function selRoom(el){document.querySelectorAll('.rowsel').forEach(r=>r.classList.remove('sel'));el.classList.add('sel');cur.room=el.dataset.room;cur.rate=+el.dataset.rate;render()}
+function payTab(el){document.querySelectorAll('.paytab').forEach(t=>t.classList.remove('on'));el.classList.add('on')}
+function summaryHTML(){const sub=cur.rate*cur.nights,dep=Math.round(sub*0.3);
+  return `<div class="r"><span>Quarto ${cur.room}</span><span>${cur.nights} noites</span></div>
+  <div class="r"><span>${cur.rate}€ x ${cur.nights} noites</span><span>${sub}€</span></div>
+  <div class="r"><span>Pequeno-almoço</span><span style="color:var(--success)">Incluído</span></div>
+  <div class="r tot"><span>Total</span><span>${sub}€</span></div>
+  <div class="r" style="color:var(--muted);font-size:13px"><span>Sinal de 30% hoje</span><span>${dep}€ · restante no check-in</span></div>`;}
+function render(){
+  [1,2,3,4].forEach(n=>{document.getElementById('step'+n).classList.toggle('on',n===step)});
+  [1,2,3].forEach(n=>{const s=document.getElementById('st'+n);s.classList.toggle('on',n===step);s.classList.toggle('done',n<step)});
+  document.getElementById('sum2').innerHTML=summaryHTML();
+  document.getElementById('sum3').innerHTML=summaryHTML();
+  document.getElementById('sum4').innerHTML=summaryHTML();
+  const back=document.getElementById('backBtn'),nextB=document.getElementById('nextBtn'),sfoot=document.getElementById('sfoot');
+  back.style.visibility = step>1&&step<4 ? 'visible':'hidden';
+  if(step===3){nextB.textContent='Confirmar e pagar sinal'} else {nextB.textContent='Continuar'}
+  sfoot.style.display = step===4 ? 'none':'flex';
+}
+function next(){ if(step<3){step++;render()} else { step=4; render(); } }
+function back(){ if(step>1){step--;render()} }
+render();
 </script>
 </body>
 </html>
