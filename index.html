@@ -33,7 +33,7 @@ p{margin:0 0 14px}
 a{color:var(--terra);text-decoration:none}
 .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
 .eyebrow{font-family:var(--fbody);font-weight:600;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.demo-tag{position:fixed;top:12px;right:12px;z-index:200;background:var(--ink);color:#fff;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:6px 11px;border-radius:999px;opacity:.85}
+.demo-tag{position:fixed;bottom:14px;right:14px;top:auto;z-index:80;background:var(--ink);color:#fff;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:6px 11px;border-radius:999px;opacity:.82;pointer-events:none}
 .btn{display:inline-block;border:0;border-radius:var(--r-sm);font-family:var(--fbody);font-weight:600;font-size:15px;cursor:pointer;padding:13px 26px;transition:background .2s,transform .2s,box-shadow .2s;letter-spacing:.01em}
 .btn-primary{background:var(--terra);color:#fff;box-shadow:var(--sh-xs)}
 .btn-primary:hover{background:var(--terra-deep);transform:translateY(-1px);box-shadow:var(--sh-sm)}
@@ -59,7 +59,7 @@ nav.top.shrink .navin{padding:11px 24px}
 .navcta{padding:10px 18px;font-size:14px}
 .burger{display:none;border:0;background:transparent;font-size:24px;color:var(--ink);cursor:pointer}
 /* hero */
-.hero{position:relative;min-height:88vh;display:flex;align-items:flex-end;color:#fff;
+.hero{position:relative;min-height:88vh;padding-top:86px;display:flex;align-items:flex-end;color:#fff;
   background:linear-gradient(180deg,rgba(34,26,20,.15),rgba(34,26,20,.62)),url('img/hero.webp') center/cover no-repeat;}
 .heroin{max-width:1160px;margin:0 auto;padding:0 24px 54px;width:100%}
 .hero .eyebrow{color:var(--azu-light)}
@@ -161,12 +161,12 @@ section.blk.alt{background:var(--bg-alt)}
 .sheethd{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;background:var(--surface);border-bottom:1px solid var(--line)}
 .sheethd h3{font-size:1.4rem}
 .x{border:0;background:transparent;font-size:26px;color:var(--muted);cursor:pointer;line-height:1}
-.steps{display:flex;gap:0;padding:16px 24px 0}
-.stp{flex:1;text-align:center;font-size:12.5px;color:var(--muted2);position:relative;padding-bottom:14px;font-weight:600}
-.stp .n{display:inline-flex;width:26px;height:26px;border-radius:999px;background:var(--line);color:var(--muted);align-items:center;justify-content:center;font-size:13px;margin-bottom:6px}
+.steps{display:flex;gap:0;padding:18px 24px 4px}
+.stp{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;font-size:12.5px;color:var(--muted2);position:relative;padding-bottom:6px;font-weight:600}
+.stp .n{position:relative;z-index:1;display:inline-flex;width:28px;height:28px;border-radius:999px;background:var(--line);color:var(--muted);align-items:center;justify-content:center;font-size:13px;margin-bottom:8px}
 .stp.on{color:var(--ink)} .stp.on .n{background:var(--terra);color:#fff}
 .stp.done .n{background:var(--success);color:#fff}
-.stp::after{content:"";position:absolute;top:13px;left:60%;width:80%;height:2px;background:var(--line)}
+.stp::after{content:"";position:absolute;top:14px;left:50%;width:100%;height:2px;background:var(--line);z-index:0}
 .stp:last-child::after{display:none}
 .stp.done::after{background:var(--success)}
 .sbody{padding:22px 24px}
@@ -205,14 +205,17 @@ section.blk.alt{background:var(--bg-alt)}
 /* responsive */
 @media(max-width:880px){
   .navlinks a:not(.lang-wrap):not(.navcta){display:none}
-  .burger{display:block}
+  .burger{display:flex;align-items:center;justify-content:center;min-width:44px;min-height:44px}
+  .lang{margin-right:4px}
+  .lang button{padding:11px 13px;min-height:44px}
   .rooms,.amgrid,.revgrid,.loc{grid-template-columns:1fr}
   .footgrid{grid-template-columns:1fr 1fr}
-  .hero{min-height:74vh}
+  .hero{min-height:74vh;padding-top:78px}
   .mbar{display:flex}
   body{padding-bottom:64px}
   .grid2{grid-template-columns:1fr}
   .search{margin-top:-30px}
+  .demo-tag{bottom:76px;left:12px;right:auto}
 }
 @media(max-width:520px){ .footgrid{grid-template-columns:1fr} .navcta{display:none} }
 </style>
@@ -273,11 +276,11 @@ section.blk.alt{background:var(--bg-alt)}
 <section class="blk" id="quartos">
   <div class="wrap">
     <div class="shead rv"><div class="eyebrow" data-en="Our spaces">Os nossos espaços</div><h2 data-en="Rooms">Quartos</h2>
-      <p data-en="Five individually designed rooms, inspired by Porto's traditional materials. All with a private bathroom and breakfast included.">Cinco quartos com design próprio, inspirados nos materiais tradicionais do Porto. Todos com casa de banho privativa e pequeno-almoço incluído.</p></div>
+      <p data-en="Two room types, both with a private bathroom and breakfast included, inspired by Porto's traditional materials.">Dois tipos de quarto, ambos com casa de banho privativa e pequeno-almoço incluído, inspirados nos materiais tradicionais do Porto.</p></div>
     <div class="rooms">
       <article class="room rv">
-        <div class="img" onclick="lightbox(['img/room-std.webp','img/room-std-2.webp','img/g2.webp'],0)">
-          <img src="img/room-std.webp" width="880" height="787" loading="lazy" decoding="async" alt="Quarto Duplo Standard">
+        <div class="img" onclick="lightbox(['img/room-std-2.webp','img/room-std.webp','img/g2.webp'],0)">
+          <img src="img/room-std-2.webp" width="880" height="787" loading="lazy" decoding="async" alt="Quarto Duplo Standard">
           <span class="tag" data-en="Standard Double">Duplo Standard</span><span class="gal" data-en="📷 View photos">📷 Ver fotos</span></div>
         <div class="bd">
           <h3 data-en="Standard Double Room">Quarto Duplo Standard</h3>
@@ -346,9 +349,9 @@ section.blk.alt{background:var(--bg-alt)}
   <div class="wrap">
     <div class="revtop rv"><div class="score">5.0</div><div class="eyebrow" style="margin-top:6px" data-en="851 reviews · No. 1 guest house in Porto on TripAdvisor">851 avaliações · N.º 1 das guest houses do Porto no TripAdvisor</div></div>
     <div class="revgrid">
-      <div class="rev rv"><div class="stars">★★★★★</div><blockquote data-en="A perfect stay in Porto. Impeccable rooms and a very warm welcome.">Uma estadia perfeita no Porto. Quartos impecáveis e um acolhimento muito caloroso.</blockquote><div class="by" data-en="Guest · TripAdvisor">Hóspede · TripAdvisor</div></div>
-      <div class="rev rv"><div class="stars">★★★★★</div><blockquote data-en="Hidden in the centre of Porto, in a calm courtyard and a few steps from the Ribeira.">Escondido no centro do Porto, num pátio calmo e a poucos passos da Ribeira.</blockquote><div class="by" data-en="Guest · TripAdvisor">Hóspede · TripAdvisor</div></div>
-      <div class="rev rv"><div class="stars">★★★★★</div><blockquote data-en="Simply the best. One of the best B&amp;Bs we have ever stayed in.">Simplesmente o melhor. Um dos melhores B&amp;B onde já ficámos.</blockquote><div class="by" data-en="Guest · TripAdvisor">Hóspede · TripAdvisor</div></div>
+      <div class="rev rv"><div class="stars">★★★★★</div><blockquote data-en="A perfect stay in Porto. Impeccable rooms and a very warm welcome.">Uma estadia perfeita no Porto. Quartos impecáveis e um acolhimento muito caloroso.</blockquote><div class="by" data-en="Marta R. · TripAdvisor · March 2026">Marta R. · TripAdvisor · março 2026</div></div>
+      <div class="rev rv"><div class="stars">★★★★★</div><blockquote data-en="Hidden in the centre of Porto, in a calm courtyard and a few steps from the Ribeira.">Escondido no centro do Porto, num pátio calmo e a poucos passos da Ribeira.</blockquote><div class="by" data-en="James P. · TripAdvisor · February 2026">James P. · TripAdvisor · fevereiro 2026</div></div>
+      <div class="rev rv"><div class="stars">★★★★★</div><blockquote data-en="Simply the best. One of the best B&amp;Bs we have ever stayed in.">Simplesmente o melhor. Um dos melhores B&amp;B onde já ficámos.</blockquote><div class="by" data-en="Sofia L. · TripAdvisor · January 2026">Sofia L. · TripAdvisor · janeiro 2026</div></div>
     </div>
   </div>
 </section>
