@@ -88,7 +88,7 @@ section.blk.alt{background:var(--bg-alt)}
 .az-divider{height:58px;background:var(--bg) var(--azu-tile);background-size:48px 48px;
   -webkit-mask:linear-gradient(90deg,transparent,#000 22%,#000 78%,transparent);mask:linear-gradient(90deg,transparent,#000 22%,#000 78%,transparent);opacity:.55}
 /* rooms */
-.rooms{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.rooms{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .room{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-xs);transition:box-shadow .25s,transform .25s}
 .room:hover{box-shadow:var(--sh-md);transform:translateY(-2px)}
 .room .img{position:relative;aspect-ratio:4/3;overflow:hidden;cursor:pointer;background:var(--card-warm)}
@@ -289,6 +289,233 @@ span.flatpickr-weekday{color:var(--muted);font-weight:600;font-size:11.5px;text-
 .flatpickr-day.inRange,.flatpickr-day.prevMonthDay.inRange,.flatpickr-day.nextMonthDay.inRange{box-shadow:-6px 0 0 var(--terra-tint),6px 0 0 var(--terra-tint)}
 .cal-hint{text-align:center;font-size:13px;color:var(--muted);margin:10px 0 0}
 @media (prefers-reduced-motion:reduce){.step.on>*,.stp.on .n,.summary .r.tot span.pulse{animation:none!important}}
+
+/* ============ BOOKING ENGINE ============ */
+.bk-sheet{max-width:880px}
+.bk-sub{font-size:12px;color:var(--muted);margin-top:3px;letter-spacing:.01em}
+.bk-hd-actions{display:flex;align-items:center;gap:10px}
+.bk-lang{font-size:11px}
+.bk-demo{flex:0 0 auto;background:var(--terra-tint);color:var(--terra-deep);font-size:11.5px;text-align:center;padding:7px 24px;border-bottom:1px solid #e8d8cf;letter-spacing:.01em}
+.bk-h{font-family:var(--fdisp);font-size:1.5rem;font-weight:600;margin:0 0 4px}
+.bk-sub2{color:var(--muted);font-size:14px;margin:0 0 18px}
+/* generic */
+.bk-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden}
+/* guests steppers */
+.bk-guests{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.bk-gcard{border:1px solid var(--line2);border-radius:var(--r-md);padding:13px 15px;display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--card)}
+.bk-gcard .gl{font-weight:600;font-size:15px}
+.bk-gcard .gh{font-size:12px;color:var(--muted);margin-top:1px}
+.bk-step{display:flex;align-items:center;gap:12px}
+.bk-rnd{width:36px;height:36px;border-radius:50%;border:1px solid var(--line2);background:var(--surface);color:var(--terra);font-size:20px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .18s,border-color .18s,transform .12s,opacity .18s}
+.bk-rnd:hover{background:var(--terra-tint);border-color:var(--terra)}
+.bk-rnd:active{transform:scale(.9)}
+.bk-rnd[disabled]{opacity:.35;cursor:not-allowed}
+.bk-rnd-val{min-width:20px;text-align:center;font-weight:600;font-size:17px}
+.bk-childages{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.bk-childages .fld{min-width:120px;flex:0 0 auto}
+.bk-childages select{padding:9px 11px}
+.bk-timenotes{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px;font-size:13px;color:var(--muted)}
+.bk-timenotes span{display:inline-flex;align-items:center;gap:6px}
+/* scarcity */
+.bk-scar{display:flex;flex-direction:column;gap:7px;margin-top:16px}
+.bk-scarline{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:var(--ink-soft)}
+.bk-scarline .si{font-size:15px}
+.bk-scarline.live .dot{width:7px;height:7px;border-radius:50%;background:var(--success);display:inline-block;box-shadow:0 0 0 0 rgba(79,107,74,.5)}
+/* trust chips */
+.bk-trust{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.bk-chip{display:inline-flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:12.5px;color:var(--ink-soft);font-weight:500}
+.bk-chip .ci{font-size:13px}
+/* social */
+.bk-social{display:flex;align-items:center;gap:10px;background:var(--bg-alt);border:1px solid var(--line);border-radius:var(--r-md);padding:12px 15px;margin-top:16px}
+.bk-social .ta{display:flex;flex-direction:column}
+.bk-social .stars{color:var(--gold);letter-spacing:2px;font-size:14px}
+.bk-social .srank{font-size:12.5px;color:var(--muted)}
+.bk-social blockquote{font-family:var(--fdisp);font-style:italic;font-size:1.02rem;color:var(--ink);margin:0;line-height:1.35;flex:1}
+.bk-social .sby{font-size:11.5px;color:var(--muted);margin-top:4px;font-style:normal}
+/* room cards */
+.bk-rooms{display:flex;flex-direction:column;gap:14px;margin-top:4px}
+.bk-room{display:grid;grid-template-columns:150px 1fr;gap:0;border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;background:var(--card);transition:border-color .2s,box-shadow .2s,transform .2s;position:relative}
+.bk-room:hover{box-shadow:var(--sh-sm)}
+.bk-room.sel{border-color:var(--terra);box-shadow:0 0 0 2px var(--terra) inset}
+.bk-room.dis{opacity:.62}
+.bk-room .rimg{position:relative;background:var(--card-warm) center/cover}
+.bk-room .rimg img{width:100%;height:100%;object-fit:cover;display:block;min-height:148px}
+.bk-room .rleft{position:absolute;top:8px;left:8px;font-size:10.5px;font-weight:700;letter-spacing:.03em;padding:4px 8px;border-radius:var(--r-sm);color:#fff}
+.bk-room .rbody{padding:14px 16px;display:flex;flex-direction:column}
+.bk-room h4{font-family:var(--fdisp);font-size:1.28rem;font-weight:600;margin:0 0 2px}
+.bk-room .rtag{font-size:13px;color:var(--muted);margin:0 0 8px}
+.bk-room .rmeta{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:9px}
+.bk-room .rmeta span{font-size:11.5px;color:var(--ink-soft);background:var(--card-warm);border:1px solid var(--line);border-radius:var(--r-sm);padding:3px 8px}
+.bk-avail{height:5px;border-radius:3px;background:var(--line);overflow:hidden;margin:2px 0 9px}
+.bk-avail i{display:block;height:100%;width:0;border-radius:3px;transition:width .7s cubic-bezier(.16,1,.3,1)}
+.bk-room .rfoot{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin-top:auto}
+.bk-room .rprice .pf{font-size:11px;color:var(--muted)}
+.bk-room .rprice .pv{font-family:var(--fdisp);color:var(--terra);font-size:1.4rem;font-weight:600;line-height:1}
+.bk-room .rprice .pn{font-size:11px;color:var(--muted)}
+.bk-room .rprice .pt2{font-size:11.5px;color:var(--ink-soft);margin-top:2px}
+.bk-selbtn{border:1px solid var(--terra);background:transparent;color:var(--terra);font-weight:600;font-size:13px;border-radius:var(--r-sm);padding:9px 14px;cursor:pointer;font-family:var(--fbody);transition:background .18s,color .18s;white-space:nowrap}
+.bk-selbtn:hover{background:var(--terra-tint)}
+.bk-room.sel .bk-selbtn{background:var(--terra);color:#fff}
+.bk-selbtn[disabled]{border-color:var(--line2);color:var(--muted2);background:transparent;cursor:not-allowed}
+.bk-check{position:absolute;top:10px;right:10px;width:26px;height:26px;border-radius:50%;background:var(--terra);color:#fff;display:none;align-items:center;justify-content:center;font-size:15px;z-index:2}
+.bk-room.sel .bk-check{display:flex;animation:pop .34s ease}
+/* rate plans */
+.bk-rates{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:4px 0 8px}
+.bk-rate{border:1px solid var(--line2);border-radius:var(--r-md);padding:15px;cursor:pointer;position:relative;transition:border-color .2s,background .2s,box-shadow .2s;background:var(--card)}
+.bk-rate:hover{border-color:var(--stone)}
+.bk-rate.sel{border-color:var(--terra);background:var(--terra-tint);box-shadow:0 0 0 1px var(--terra) inset}
+.bk-rate .rn{font-weight:700;font-size:14.5px;margin-bottom:5px;padding-right:40px}
+.bk-rate .rb{font-size:12.5px;color:var(--muted);line-height:1.45}
+.bk-rate .rbadge{position:absolute;top:11px;right:11px;font-size:9.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:3px 7px;border-radius:999px;background:var(--azu);color:#fff}
+.bk-rate.sel .rbadge{background:var(--terra)}
+.bk-rate .rprice{font-family:var(--fdisp);font-size:1.1rem;color:var(--terra);font-weight:600;margin-top:9px}
+.bk-rate .rprice.free{color:var(--success)}
+/* extras */
+.bk-extras{display:flex;flex-direction:column;gap:10px;margin:4px 0 6px}
+.bk-extra{display:flex;align-items:center;gap:13px;border:1px solid var(--line);border-radius:var(--r-md);padding:12px 14px;background:var(--card);transition:border-color .2s,background .2s}
+.bk-extra.on{border-color:var(--terra);background:var(--terra-tint)}
+.bk-extra .ex-ic{font-size:22px;flex:0 0 auto}
+.bk-extra .ex-b{flex:1;min-width:0}
+.bk-extra .ex-t{font-weight:600;font-size:14px}
+.bk-extra .ex-d{font-size:12.5px;color:var(--muted);line-height:1.4}
+.bk-extra .ex-p{font-family:var(--fdisp);color:var(--terra);font-weight:600;font-size:1.02rem;white-space:nowrap}
+.bk-extra .ex-p small{font-family:var(--fbody);font-size:10.5px;color:var(--muted);display:block;text-align:right;font-weight:400}
+.bk-tog{flex:0 0 auto;width:46px;height:27px;border-radius:999px;background:var(--line2);position:relative;cursor:pointer;transition:background .25s;border:0}
+.bk-tog::after{content:"";position:absolute;top:3px;left:3px;width:21px;height:21px;border-radius:50%;background:#fff;box-shadow:var(--sh-xs);transition:transform .32s cubic-bezier(.34,1.56,.64,1)}
+.bk-extra.on .bk-tog{background:var(--terra)}
+.bk-extra.on .bk-tog::after{transform:translateX(19px)}
+/* promo */
+.bk-promo{margin:14px 0 2px;border-top:1px solid var(--line);padding-top:16px}
+.bk-promo-row{display:flex;gap:8px;margin-top:8px}
+.bk-promo-row input{flex:1;background:var(--card);border:1px solid var(--line2);border-radius:var(--r-sm);padding:11px 13px;font-family:var(--fbody);font-size:15px;text-transform:uppercase;letter-spacing:.05em}
+.bk-promo-row input:focus{outline:0;border-color:var(--azu);box-shadow:0 0 0 3px rgba(94,116,138,.2)}
+.bk-promo-msg{font-size:13px;margin-top:8px}
+.bk-promo-msg.ok{color:var(--success)}
+.bk-promo-msg.bad{color:var(--danger)}
+.bk-promo-chip{display:inline-flex;align-items:center;gap:8px;background:#eaf0e8;color:var(--success);border-radius:var(--r-sm);padding:6px 10px;font-size:13px;font-weight:600;margin-top:8px}
+.bk-promo-chip button{border:0;background:transparent;color:var(--success);cursor:pointer;font-size:14px;text-decoration:underline}
+/* guest form */
+.bk-form{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.bk-form .full{grid-column:1 / -1}
+.bk-phone{display:grid;grid-template-columns:96px 1fr;gap:8px}
+.bk-field label{display:block;font-size:13px;font-weight:500;color:var(--muted);margin-bottom:5px}
+.bk-field input,.bk-field select,.bk-field textarea{width:100%;background:var(--card);border:1px solid var(--line2);border-radius:var(--r-sm);padding:11px 12px;font-family:var(--fbody);font-size:15px;color:var(--ink);transition:border-color .2s,box-shadow .2s}
+.bk-field textarea{resize:vertical;min-height:74px}
+.bk-field input:focus,.bk-field select:focus,.bk-field textarea:focus{outline:0;border-color:var(--terra);box-shadow:0 0 0 3px var(--terra-tint)}
+.bk-field.err input,.bk-field.err select,.bk-field.err textarea{border-color:var(--danger);box-shadow:0 0 0 3px rgba(154,74,58,.12)}
+.bk-field .fhelp{font-size:11.5px;color:var(--muted2);margin-top:5px}
+.bk-field .ferr{font-size:11.5px;color:var(--danger);margin-top:5px;display:none}
+.bk-field.err .ferr{display:block}
+.bk-field.err .fhelp{display:none}
+.bk-counter{font-size:11px;color:var(--muted2);text-align:right;margin-top:4px}
+/* payment */
+.bk-pay-head{font-family:var(--fdisp);font-size:1.2rem;font-weight:600;margin:22px 0 4px}
+.bk-paytabs{display:flex;gap:8px;margin:12px 0 14px}
+.bk-paytab{flex:1;border:1px solid var(--line2);border-radius:var(--r-sm);padding:11px 8px;cursor:pointer;text-align:center;font-size:13.5px;font-weight:600;color:var(--muted);background:var(--card);transition:border-color .2s,background .2s,color .2s;display:flex;align-items:center;justify-content:center;gap:6px}
+.bk-paytab.on{border-color:var(--terra);background:var(--terra-tint);color:var(--terra-deep)}
+.bk-paypanel{border:1px solid var(--line);border-radius:var(--r-md);padding:16px;background:var(--surface)}
+.bk-paydesc{font-size:13px;color:var(--muted);margin:0 0 13px}
+.bk-cardbrand{position:absolute;right:12px;top:34px;font-size:11px;font-weight:800;letter-spacing:.04em;color:var(--muted)}
+.bk-field.rel{position:relative}
+.bk-mb-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px dashed var(--line);font-size:14px}
+.bk-mb-row:last-of-type{border-bottom:0}
+.bk-mb-row b{font-family:var(--fdisp);font-size:1.15rem;color:var(--ink);letter-spacing:.02em}
+.bk-copybtn{border:1px solid var(--line2);background:var(--card);border-radius:var(--r-sm);padding:8px 12px;font-size:12.5px;font-weight:600;color:var(--terra);cursor:pointer;margin-top:10px}
+.bk-trustline{font-size:12px;color:var(--muted);margin-top:13px;display:flex;align-items:center;gap:7px}
+/* deposit box */
+.bk-deposit{border:1px solid var(--azu-light);background:linear-gradient(180deg,#eef2f5,#fbfaf6);border-radius:var(--r-md);padding:15px 17px;margin-top:14px}
+.bk-deposit .dh{font-weight:700;font-size:15px;color:var(--azu-deep);display:flex;align-items:center;gap:8px}
+.bk-deposit .db{font-size:12.5px;color:var(--ink-soft);margin-top:5px;line-height:1.45}
+/* summary card (reuse .summary base) */
+.bk-summary{background:var(--card-warm);border:1px solid var(--line);border-radius:var(--r-md);padding:16px 18px;margin-top:18px}
+.bk-summary .sh{font-family:var(--fdisp);font-size:1.1rem;font-weight:600;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.bk-sum-r{display:flex;justify-content:space-between;align-items:baseline;gap:14px;font-size:14px;margin:7px 0}
+.bk-sum-r>span:last-child{white-space:nowrap;flex:0 0 auto;font-variant-numeric:tabular-nums}
+.bk-sum-r.sub{color:var(--muted);font-size:12.5px;margin:2px 0 7px}
+.bk-sum-r.disc>span:last-child{color:var(--success)}
+.bk-sum-r.tot{border-top:1px solid var(--line);margin-top:10px;padding-top:11px;font-weight:700;font-size:17px}
+.bk-sum-r.tot>span:last-child{color:var(--terra);transform-origin:right center;display:inline-block}
+.bk-sum-r.dep{font-size:13px;color:var(--azu-deep);font-weight:600}
+.bk-sum-r.bal{font-size:12.5px;color:var(--muted)}
+/* footer */
+.bk-foot{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.bk-foot-price{display:flex;flex-direction:column;line-height:1.2}
+.bk-foot-price .ft{font-family:var(--fdisp);font-size:1.3rem;font-weight:600;color:var(--ink)}
+.bk-foot-price .ft .tv{transform-origin:left center;display:inline-block}
+.bk-foot-price .fd{font-size:11.5px;color:var(--muted)}
+.bk-foot-price .fd b{color:var(--azu-deep)}
+.bk-foot-btns{display:flex;gap:10px;align-items:center}
+/* confirmation */
+.bk-conf{text-align:center;padding:8px 4px 4px}
+.bk-seal{width:84px;height:84px;border-radius:50%;background:#eaf0e8;color:var(--success);display:flex;align-items:center;justify-content:center;margin:0 auto 8px;position:relative}
+.bk-seal svg{width:46px;height:46px}
+.bk-seal .ring{position:absolute;inset:0;border-radius:50%;border:2px solid var(--success)}
+.bk-tiles{display:flex;justify-content:center;gap:9px;margin:14px 0 6px}
+.bk-tile{width:15px;height:15px;transform:rotate(45deg);border-radius:2px}
+.bk-conf h3{font-family:var(--fdisp);font-size:1.85rem;font-weight:600;margin:6px 0 6px}
+.bk-conf .csub{color:var(--muted);max-width:46ch;margin:0 auto 16px;font-size:14.5px}
+.bk-refcard{display:inline-flex;flex-direction:column;align-items:center;gap:4px;border:1px dashed var(--terra);background:var(--card);border-radius:var(--r-md);padding:12px 26px;margin-bottom:6px}
+.bk-refcard .rl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.bk-refcard .rv{font-family:var(--fdisp);font-size:1.7rem;color:var(--terra);font-weight:600;letter-spacing:.03em}
+.bk-copyref{border:0;background:transparent;color:var(--azu);font-size:12px;cursor:pointer;text-decoration:underline;margin-top:2px}
+.bk-confgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:430px;margin:16px auto}
+.bk-confcell{border:1px solid var(--line);border-radius:var(--r-md);padding:12px;background:var(--card);text-align:left}
+.bk-confcell .cl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.bk-confcell .cv{font-family:var(--fdisp);font-size:1.15rem;color:var(--ink);margin-top:2px}
+.bk-confcell .cn{font-size:11.5px;color:var(--muted)}
+.bk-paidbox{max-width:440px;margin:8px auto 0;background:#eef2f5;border:1px solid var(--azu-light);border-radius:var(--r-md);padding:13px 16px;text-align:left}
+.bk-paidbox .pp{font-weight:700;color:var(--azu-deep);font-size:14.5px}
+.bk-paidbox .pr{font-size:12.5px;color:var(--ink-soft);margin-top:3px}
+.bk-next{max-width:480px;margin:18px auto 0;text-align:left}
+.bk-next .nt{font-family:var(--fdisp);font-size:1.15rem;text-align:center;margin-bottom:12px}
+.bk-nextrow{display:flex;gap:12px;align-items:flex-start;padding:9px 0}
+.bk-nextrow .nn{flex:0 0 auto;width:28px;height:28px;border-radius:50%;background:var(--terra-tint);color:var(--terra-deep);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
+.bk-nextrow .nb .nh{font-weight:600;font-size:14px}
+.bk-nextrow .nb .nd{font-size:12.5px;color:var(--muted)}
+.bk-confctas{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:20px 0 4px}
+.bk-mbpend{max-width:430px;margin:0 auto}
+.bk-mbpend .pend-badge{display:inline-flex;align-items:center;gap:7px;background:#fbf2e0;color:var(--gold);border:1px solid #ecdcb8;border-radius:999px;padding:5px 12px;font-size:12.5px;font-weight:600;margin-bottom:12px}
+/* mb way / card processing overlay */
+.bk-processing{text-align:center;padding:30px 10px}
+.bk-pulse-ring{width:96px;height:96px;border-radius:50%;margin:0 auto 18px;position:relative;display:flex;align-items:center;justify-content:center;background:var(--terra-tint);color:var(--terra);font-weight:800;font-size:15px;letter-spacing:.02em}
+.bk-spin{width:42px;height:42px;border-radius:50%;border:3px solid var(--line2);border-top-color:var(--terra);margin:0 auto 16px}
+.bk-processing p{color:var(--muted);font-size:14px}
+/* tooltips on chips (title attr is enough; keep simple) */
+@media (prefers-reduced-motion:no-preference){
+  .bk-avail i.fill{animation:availFill .7s cubic-bezier(.16,1,.3,1)}
+  @keyframes availFill{from{width:0}}
+  .bk-scarline.pulse{animation:scarPulse .9s ease-in-out 1}
+  @keyframes scarPulse{0%{opacity:.4;transform:scale(.99)}55%{opacity:1;transform:scale(1.01)}100%{opacity:1;transform:none}}
+  .bk-tog.spring::after{animation:none}
+  .bk-seal.go{animation:sealPop .42s cubic-bezier(.2,.8,.3,1.2)}
+  @keyframes sealPop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+  .bk-seal.go .ring{animation:sealRing 1s ease-out 1}
+  @keyframes sealRing{from{transform:scale(1);opacity:.4}to{transform:scale(1.6);opacity:0}}
+  .bk-seal.go svg path{stroke-dasharray:48;stroke-dashoffset:48;animation:draw .52s .12s ease-out forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  .bk-tile.go{animation:tilePop .4s cubic-bezier(.2,.8,.3,1.2) backwards}
+  @keyframes tilePop{from{transform:rotate(45deg) scale(0);opacity:0}to{transform:rotate(45deg) scale(1);opacity:1}}
+  .bk-spin{animation:bkspin .8s linear infinite}
+  @keyframes bkspin{to{transform:rotate(360deg)}}
+  .bk-pulse-ring::before{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--terra);animation:mbpulse 1.4s ease-out infinite}
+  @keyframes mbpulse{from{transform:scale(1);opacity:.6}to{transform:scale(1.5);opacity:0}}
+}
+.bk-foot-price .ft .tv.up{color:var(--terra)}
+.bk-foot-price .ft .tv.down{color:var(--success)}
+/* responsive */
+@media(max-width:760px){
+  .bk-rooms .bk-room{grid-template-columns:1fr}
+  .bk-room .rimg img{min-height:150px}
+  .bk-rates{grid-template-columns:1fr}
+  .bk-form{grid-template-columns:1fr}
+  .bk-guests{grid-template-columns:1fr}
+  .bk-paytabs{flex-wrap:wrap}
+  .bk-confgrid{grid-template-columns:1fr}
+  .modal .stp span{display:none}
+  .bk-foot-price .ft{font-size:1.15rem}
+  .bk-sheet{max-width:100%}
+}
+
 </style>
 </head>
 <body>
@@ -347,7 +574,7 @@ span.flatpickr-weekday{color:var(--muted);font-weight:600;font-size:11.5px;text-
 <section class="blk" id="quartos">
   <div class="wrap">
     <div class="shead rv"><div class="eyebrow" data-en="Our spaces">Os nossos espaços</div><h2 data-en="Rooms">Quartos</h2>
-      <p data-en="Two room types, both with a private bathroom and breakfast included, inspired by Porto's traditional materials.">Dois tipos de quarto, ambos com casa de banho privativa e pequeno-almoço incluído, inspirados nos materiais tradicionais do Porto.</p></div>
+      <p data-en="Three room types, all with a private bathroom and breakfast included, inspired by Porto's traditional materials.">Três tipos de quarto, todos com casa de banho privativa e pequeno-almoço incluído, inspirados nos materiais tradicionais do Porto.</p></div>
     <div class="rooms">
       <article class="room rv">
         <div class="img" onclick="lightbox(['img/room-std-2.webp','img/room-std.webp','img/g2.webp'],0)">
@@ -358,7 +585,7 @@ span.flatpickr-weekday{color:var(--muted);font-weight:600;font-size:11.5px;text-
           <div class="specs"><span data-en="Up to 2 guests">Até 2 hóspedes</span><span data-en="Double bed">Cama de casal</span><span data-en="Stone and tile">Pedra e azulejo</span><span data-en="Courtyard view">Vista pátio</span></div>
           <div><span class="chip" data-en="Breakfast included">Pequeno-almoço incluído</span><span class="chip" data-en="Free cancellation">Cancelamento gratuito</span></div>
           <div class="foot"><div class="price" data-en="From €135 <small>/ night</small>">Desde 135€ <small>/ noite</small></div>
-            <button class="btn btn-primary" data-en="Book this room" onclick="openBooking('Standard',135)">Reservar quarto</button></div>
+            <button class="btn btn-primary" data-en="Book this room" onclick="openBooking('standard')">Reservar quarto</button></div>
         </div>
       </article>
       <article class="room rv">
@@ -370,7 +597,19 @@ span.flatpickr-weekday{color:var(--muted);font-weight:600;font-size:11.5px;text-
           <div class="specs"><span data-en="Up to 3 guests">Até 3 hóspedes</span><span data-en="A little larger">Um pouco maior</span><span data-en="Extra bed possible">Cama extra possível</span><span data-en="Underfloor heating">Piso radiante</span></div>
           <div><span class="chip" data-en="Breakfast included">Pequeno-almoço incluído</span><span class="chip" data-en="Free cancellation">Cancelamento gratuito</span></div>
           <div class="foot"><div class="price" data-en="From €149 <small>/ night</small>">Desde 149€ <small>/ noite</small></div>
-            <button class="btn btn-primary" data-en="Book this room" onclick="openBooking('Superior',149)">Reservar quarto</button></div>
+            <button class="btn btn-primary" data-en="Book this room" onclick="openBooking('superior')">Reservar quarto</button></div>
+        </div>
+      </article>
+      <article class="room rv">
+        <div class="img" onclick="lightbox(['img/room-sup-2.webp','img/g4.webp','img/room-sup.webp'],0)">
+          <img src="img/room-sup-2.webp" width="880" height="787" loading="lazy" decoding="async" alt="Suite Pátio">
+          <span class="tag" data-en="Suite">Suite</span><span class="gal" data-en="📷 View photos">📷 Ver fotos</span></div>
+        <div class="bd">
+          <h3 data-en="Pátio Suite">Suite Pátio</h3>
+          <div class="specs"><span data-en="Up to 2 guests">Até 2 hóspedes</span><span data-en="King bed">Cama king</span><span data-en="Stone bathroom">Casa de banho em pedra</span><span data-en="Courtyard view">Vista pátio</span></div>
+          <div><span class="chip" data-en="Breakfast included">Pequeno-almoço incluído</span><span class="chip" data-en="Free cancellation">Cancelamento gratuito</span></div>
+          <div class="foot"><div class="price" data-en="From €195 <small>/ night</small>">Desde 195€ <small>/ noite</small></div>
+            <button class="btn btn-primary" data-en="Book this room" onclick="openBooking('suite')">Reservar quarto</button></div>
         </div>
       </article>
     </div>
@@ -460,63 +699,22 @@ span.flatpickr-weekday{color:var(--muted);font-weight:600;font-size:11.5px;text-
 </div>
 
 <!-- booking modal -->
-<div class="modal" id="modal">
-  <div class="sheet">
-    <div class="sheethd"><h3 data-en="Book your stay">Reservar a sua estadia</h3><button class="x" aria-label="Close" onclick="closeBooking()">×</button></div>
-    <div class="steps">
-      <div class="stp on" id="st1"><div class="n">1</div><span data-en="Dates and guests">Datas e hóspedes</span></div>
-      <div class="stp" id="st2"><div class="n">2</div><span data-en="Room and rate">Quarto e tarifa</span></div>
-      <div class="stp" id="st3"><div class="n">3</div><span data-en="Details and payment">Dados e pagamento</span></div>
-    </div>
-    <div class="sbody">
-      <div class="step on" id="step1">
-        <label style="display:block;font-size:14px;font-weight:500;color:var(--muted);margin-bottom:8px" data-en="Choose your dates">Escolha as suas datas</label>
-        <div id="cal-wrap"><input class="cal-input" id="cal" type="text"></div>
-        <p class="cal-hint" data-en="Tap your check-in date, then your check-out.">Toque na data de entrada e depois na de saída.</p>
-        <div class="fld" style="margin-top:16px"><label data-en="Guests">Hóspedes</label>
-          <select id="mg"><option data-en="1 adult">1 adulto</option><option selected data-en="2 adults">2 adultos</option><option data-en="2 adults + 1 child">2 adultos + 1 criança</option></select></div>
-        <p class="helper" id="nightsNote" style="margin-top:14px"></p>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Reservar">
+  <div class="sheet bk-sheet">
+    <div class="sheethd">
+      <div>
+        <h3 id="bk-title">Reservar a sua estadia</h3>
+        <div class="bk-sub" id="bk-sub">inPátio Guest House · Ribeira, Porto</div>
       </div>
-      <div class="step" id="step2">
-        <div class="rowsel sel" data-room="Standard" data-rate="135" onclick="selRoom(this)">
-          <div><b data-en="Standard Double Room">Quarto Duplo Standard</b><div style="font-size:13px;color:var(--muted)" data-en="Breakfast included · free cancellation">Pequeno-almoço incluído · cancelamento gratuito</div></div>
-          <div class="rp">135€<small style="font-family:var(--fbody);font-size:12px;color:var(--muted)" data-en=" /night"> /noite</small></div></div>
-        <div class="rowsel" data-room="Superior" data-rate="149" onclick="selRoom(this)">
-          <div><b data-en="Superior Double or Twin Room">Quarto Duplo ou Twin Superior</b><div style="font-size:13px;color:var(--muted)" data-en="A little larger · extra bed possible">Um pouco maior · cama extra possível</div></div>
-          <div class="rp">149€<small style="font-family:var(--fbody);font-size:12px;color:var(--muted)" data-en=" /night"> /noite</small></div></div>
-        <div class="summary" id="sum2"></div>
-      </div>
-      <div class="step" id="step3">
-        <div class="grid2">
-          <div class="fld"><label data-en="Name">Nome</label><input id="fn" placeholder="O seu nome" data-en-ph="Your name"></div>
-          <div class="fld"><label data-en="Email">Email</label><input id="fe" placeholder="o.seu@email.com"></div>
-        </div>
-        <div class="fld" style="margin-top:12px"><label data-en="Phone">Telemóvel</label><input id="fp" placeholder="+351 ..."></div>
-        <p style="font-weight:600;margin:18px 0 6px" data-en="Payment">Pagamento</p>
-        <div class="paytabs">
-          <div class="paytab on" onclick="payTab(this)">MB WAY</div>
-          <div class="paytab" onclick="payTab(this)" data-en="Card">Cartão</div>
-          <div class="paytab" onclick="payTab(this)">Multibanco</div>
-        </div>
-        <div class="fld"><label data-en="MB WAY phone number">Número de telemóvel MB WAY</label><input placeholder="+351 9.."></div>
-        <div class="summary" id="sum3" style="margin-top:14px"></div>
-        <div class="pays"><span class="mbway">MB WAY</span><span>VISA</span><span>Mastercard</span><span>Multibanco</span></div>
-        <p class="helper" data-en="🔒 Secure payment. To confirm the booking a 30% deposit is requested, the remainder is paid at check-in.">🔒 Pagamento seguro. Para garantir a reserva é pedido um sinal de 30%, o restante é pago no check-in.</p>
-      </div>
-      <div class="step" id="step4">
-        <div class="done">
-          <div class="tick">✓</div>
-          <h3 style="font-size:1.7rem" data-en="Booking confirmed. Everything is taken care of.">Reserva confirmada. Está tudo tratado.</h3>
-          <p style="color:var(--muted);max-width:40ch;margin:8px auto 6px" data-en="Your room is ready and waiting. We have sent all the details to your email.">Já temos o seu quarto à sua espera. Enviámos todos os detalhes para o seu email.</p>
-          <div class="ref" id="refOut">INP-2026-04821</div>
-          <div class="summary" id="sum4" style="text-align:left;max-width:380px;margin:8px auto 0"></div>
-        </div>
+      <div class="bk-hd-actions">
+        <div class="lang bk-lang"><button data-lang="pt">PT</button><button data-lang="en">EN</button></div>
+        <button class="x" id="bk-close" aria-label="Fechar" onclick="closeBooking()">×</button>
       </div>
     </div>
-    <div class="sfoot" id="sfoot">
-      <button class="btn btn-sec" id="backBtn" onclick="back()" style="visibility:hidden">Voltar</button>
-      <button class="btn btn-primary" id="nextBtn" onclick="next()">Continuar</button>
-    </div>
+    <div class="bk-demo" id="bk-demo"></div>
+    <div class="steps" id="bk-steps"></div>
+    <div class="sbody" id="bk-body"></div>
+    <div class="sfoot bk-foot" id="bk-foot"></div>
   </div>
 </div>
 
@@ -531,104 +729,540 @@ span.flatpickr-weekday{color:var(--muted);font-weight:600;font-size:11.5px;text-
 <script src="vendor/flatpickr.min.js"></script>
 <script src="vendor/flatpickr-pt.js"></script>
 <script>
-// ---------- i18n ----------
+/* ============ shared language (public page) ============ */
 let lang='pt';
-// dynamic strings (booking flow + nights note), per language
-const TX={
-  pt:{cont:'Continuar',back:'Voltar',confirm:'Confirmar e pagar sinal',
-    roomLine:r=>`Quarto ${r}`, nights:n=>`${n} noites`, rateLine:(r,n)=>`${r}€ x ${n} noites`,
-    breakfast:'Pequeno-almoço', included:'Incluído', total:'Total',
-    depToday:'Sinal de 30% hoje', depRest:d=>`${d}€ · restante no check-in`,
-    nightsNote:n=>`${n} noites · 10 a 13 de julho`},
-  en:{cont:'Continue',back:'Back',confirm:'Confirm and pay deposit',
-    roomLine:r=>`${r} room`, nights:n=>`${n} nights`, rateLine:(r,n)=>`€${r} x ${n} nights`,
-    breakfast:'Breakfast', included:'Included', total:'Total',
-    depToday:'30% deposit today', depRest:d=>`€${d} · remainder at check-in`,
-    nightsNote:n=>`${n} nights · 10 to 13 July`}
-};
-// capture original PT content for every translatable node once
 document.querySelectorAll('[data-en]').forEach(el=>{ el.dataset.pt=el.innerHTML; });
 document.querySelectorAll('[data-en-ph]').forEach(el=>{ el.dataset.ptPh=el.getAttribute('placeholder')||''; });
 function applyLang(l){
   lang=(l==='en')?'en':'pt';
   document.documentElement.lang=lang;
-  document.querySelectorAll('[data-en]').forEach(el=>{
-    const v = lang==='en' ? el.dataset.en : el.dataset.pt;
-    if(el.tagName==='TITLE'){ document.title=v; } else { el.innerHTML=v; }
-  });
-  document.querySelectorAll('[data-en-ph]').forEach(el=>{
-    el.setAttribute('placeholder', lang==='en'?el.dataset.enPh:el.dataset.ptPh);
-  });
+  document.querySelectorAll('[data-en]').forEach(el=>{ const v=lang==='en'?el.dataset.en:el.dataset.pt; if(el.tagName==='TITLE'){document.title=v;} else {el.innerHTML=v;} });
+  document.querySelectorAll('[data-en-ph]').forEach(el=>{ el.setAttribute('placeholder', lang==='en'?el.dataset.enPh:el.dataset.ptPh); });
   document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.lang===lang));
-  setPickerLocale(); setNightsNote(); render();
   try{ localStorage.setItem('inpatio_lang',lang); }catch(e){}
+  if(window.BK) BK.setLang(lang);
 }
 document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>applyLang(b.dataset.lang)));
-
-// ---------- nav shrink + reveal ----------
+/* nav shrink + reveal */
 const nav=document.getElementById('nav');
 addEventListener('scroll',()=>nav.classList.toggle('shrink',scrollY>40),{passive:true});
 const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
-
-// ---------- faq ----------
+/* faq */
 function tog(b){b.parentElement.classList.toggle('open')}
-
-// ---------- lightbox ----------
+/* lightbox */
 let lbImgs=[],lbI=0;
 function lightbox(imgs,i){lbImgs=imgs;lbI=i;document.getElementById('lbImg').src=imgs[i];document.getElementById('lb').classList.add('show')}
 function lbStep(d){lbI=(lbI+d+lbImgs.length)%lbImgs.length;document.getElementById('lbImg').src=lbImgs[lbI]}
 function closeLb(){document.getElementById('lb').classList.remove('show')}
-
-// ---------- booking flow ----------
-let cur={room:'Standard',rate:135,nights:3,ci:new Date(2026,6,10),co:new Date(2026,6,13)},step=1;
-const MO={pt:['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'],
-          en:['January','February','March','April','May','June','July','August','September','October','November','December']};
-function fmtRange(d1,d2){ if(!d1||!d2) return ''; const a=d1.getDate(),b=d2.getDate(),m=MO[lang];
-  if(d1.getMonth()===d2.getMonth()) return lang==='en'?`${a} to ${b} ${m[d2.getMonth()]}`:`${a} a ${b} de ${m[d2.getMonth()]}`;
-  return lang==='en'?`${a} ${m[d1.getMonth()]} to ${b} ${m[d2.getMonth()]}`:`${a} de ${m[d1.getMonth()]} a ${b} de ${m[d2.getMonth()]}`; }
-function setNightsNote(){const el=document.getElementById('nightsNote'); if(el) el.textContent = TX[lang].nights(cur.nights)+' · '+fmtRange(cur.ci,cur.co);}
-function pulseTotals(){document.querySelectorAll('.summary .r.tot span:last-child').forEach(s=>{s.classList.remove('pulse');void s.offsetWidth;s.classList.add('pulse');});}
-let pickers=[],calFp=null;
-function calChange(sel){ if(sel&&sel.length===2){ cur.ci=sel[0]; cur.co=sel[1]; cur.nights=Math.max(1,Math.round((sel[1]-sel[0])/864e5)); setNightsNote(); render(); pulseTotals(); } }
-function setPickerLocale(){ if(typeof flatpickr==='undefined') return; const loc=lang==='pt'?(flatpickr.l10ns.pt||flatpickr.l10ns.default):flatpickr.l10ns.default; pickers.forEach(p=>{try{p.set('locale',loc);}catch(e){}}); }
-function initPickers(){ if(typeof flatpickr==='undefined') return;
-  calFp=flatpickr('#cal',{inline:true,mode:'range',minDate:'2026-06-16',defaultDate:['2026-07-10','2026-07-13'],onReady:(s)=>calChange(s),onChange:(s)=>calChange(s)});
-  pickers.push(calFp);
-  const co=flatpickr('#co',{minDate:'2026-06-16',defaultDate:'2026-07-13',dateFormat:'d/m/Y'});
-  const ci=flatpickr('#ci',{minDate:'2026-06-16',defaultDate:'2026-07-10',dateFormat:'d/m/Y',onChange:(s)=>{ if(s[0]&&co) co.set('minDate',s[0]); }});
-  pickers.push(ci,co);
-  setPickerLocale();
+/* hero decorative pickers */
+function initHeroPickers(){ if(typeof flatpickr==='undefined') return;
+  try{
+    const co=flatpickr('#co',{minDate:'2026-06-16',defaultDate:'2026-07-20',dateFormat:'d/m/Y'});
+    flatpickr('#ci',{minDate:'2026-06-16',defaultDate:'2026-07-17',dateFormat:'d/m/Y',onChange:(s)=>{ if(s[0]&&co) co.set('minDate',s[0]); }});
+  }catch(e){}
 }
-function openBooking(room,rate){ if(room){cur.room=room;cur.rate=rate;} step=1; render(); document.getElementById('modal').classList.add('show'); }
-function closeBooking(){document.getElementById('modal').classList.remove('show')}
-function selRoom(el){document.querySelectorAll('.rowsel').forEach(r=>r.classList.remove('sel'));el.classList.add('sel');cur.room=el.dataset.room;cur.rate=+el.dataset.rate;render();pulseTotals()}
-function payTab(el){document.querySelectorAll('.paytab').forEach(t=>t.classList.remove('on'));el.classList.add('on')}
-function summaryHTML(){const t=TX[lang],sub=cur.rate*cur.nights,dep=Math.round(sub*0.3),sub$=lang==='en'?`€${sub}`:`${sub}€`;
-  return `<div class="r"><span>${t.roomLine(cur.room)}</span><span>${t.nights(cur.nights)}</span></div>
-  <div class="r"><span>${t.rateLine(cur.rate,cur.nights)}</span><span>${sub$}</span></div>
-  <div class="r"><span>${t.breakfast}</span><span style="color:var(--success)">${t.included}</span></div>
-  <div class="r tot"><span>${t.total}</span><span>${sub$}</span></div>
-  <div class="r dep"><span>${t.depToday}</span><span>${t.depRest(dep)}</span></div>`;}
-function render(){
-  [1,2,3,4].forEach(n=>{document.getElementById('step'+n).classList.toggle('on',n===step)});
-  [1,2,3].forEach(n=>{const s=document.getElementById('st'+n);s.classList.toggle('on',n===step);s.classList.toggle('done',n<step)});
-  document.getElementById('sum2').innerHTML=summaryHTML();
-  document.getElementById('sum3').innerHTML=summaryHTML();
-  document.getElementById('sum4').innerHTML=summaryHTML();
-  const back=document.getElementById('backBtn'),nextB=document.getElementById('nextBtn'),sfoot=document.getElementById('sfoot');
-  back.style.visibility = step>1&&step<4 ? 'visible':'hidden';
-  back.textContent=TX[lang].back;
-  nextB.textContent = step===3 ? TX[lang].confirm : TX[lang].cont;
-  sfoot.style.display = step===4 ? 'none':'flex';
-}
-function next(){ if(step<3){step++;render()} else { step=4; render(); } }
-function back(){ if(step>1){step--;render()} }
 
-// ---------- init ----------
+/* ============ BOOKING ENGINE ============ */
+const DATA = {"roomTypes": [{"id": "standard", "name": {"pt": "Quarto Duplo Standard", "en": "Standard Double Room"}, "tagline": {"pt": "Aconchego em pedra e azulejo, no coração da Ribeira.", "en": "Snug stone and tile comfort, in the heart of the Ribeira."}, "description": {"pt": "Um quarto duplo tranquilo num edifício restaurado do século XIX, com cama de casal, casa de banho privativa e o pequeno-almoço da Olga incluído. Materiais tradicionais do Porto e a calma do pátio a poucos passos.", "en": "A calm double room in a restored 19th century building, with a double bed, private bathroom and Olga's breakfast included. Traditional Porto materials and the quiet of the courtyard just a few steps away."}, "sizeM2": 16, "maxAdults": 2, "maxChildren": 1, "beds": {"pt": "1 cama de casal (queen)", "en": "1 double bed (queen)"}, "features": [{"pt": "Casa de banho privativa com piso radiante", "en": "Private bathroom with underfloor heating"}, {"pt": "Ar condicionado e aquecimento", "en": "Air conditioning and heating"}, {"pt": "Wi-Fi gratuito", "en": "Free Wi-Fi"}, {"pt": "TV de ecrã plano", "en": "Flat-screen TV"}, {"pt": "Minibar e cofre", "en": "Minibar and safe"}, {"pt": "Pequeno-almoço incluído", "en": "Breakfast included"}], "baseRate": 135, "inventory": 2, "image": "room-std-2.webp"}, {"id": "superior", "name": {"pt": "Quarto Duplo ou Twin Superior", "en": "Superior Double or Twin Room"}, "tagline": {"pt": "Um pouco mais de espaço, com a cabeceira em azulejo.", "en": "A little more space, with the signature azulejo headboard."}, "description": {"pt": "O nosso quarto mais versátil: cama de casal ou duas camas individuais, com a cabeceira em azulejo que se tornou imagem de marca da casa. Um pouco maior, com possibilidade de cama extra para uma terceira pessoa.", "en": "Our most versatile room: a double bed or two single beds, with the azulejo headboard that became the house signature. A little larger, with the option of an extra bed for a third guest."}, "sizeM2": 20, "maxAdults": 3, "maxChildren": 1, "beds": {"pt": "1 cama de casal ou 2 camas individuais (cama extra possível)", "en": "1 double bed or 2 single beds (extra bed possible)"}, "features": [{"pt": "Cama extra possível para 3 hóspedes", "en": "Extra bed possible for a third guest"}, {"pt": "Cabeceira em azulejo tradicional", "en": "Traditional azulejo headboard"}, {"pt": "Casa de banho privativa com piso radiante", "en": "Private bathroom with underfloor heating"}, {"pt": "Ar condicionado e aquecimento", "en": "Air conditioning and heating"}, {"pt": "Minibar, cofre e Wi-Fi gratuito", "en": "Minibar, safe and free Wi-Fi"}, {"pt": "Pequeno-almoço incluído", "en": "Breakfast included"}], "baseRate": 149, "inventory": 2, "image": "room-sup.webp"}, {"id": "suite", "name": {"pt": "Suite Pátio", "en": "Pátio Suite"}, "tagline": {"pt": "O nosso quarto mais especial, com casa de banho em pedra à vista.", "en": "Our most special room, with an exposed stone bathroom."}, "description": {"pt": "A suite mais ampla da casa, com casa de banho em pedra granítica à vista do edifício original e muita luz natural. O lugar certo para uma ocasião especial, com vista para o pátio histórico e sala de estar privativa.", "en": "The largest room in the house, with an exposed granite stone bathroom from the original building and plenty of natural light. The right place for a special occasion, with a view over the historic courtyard and a private sitting area."}, "sizeM2": 26, "maxAdults": 2, "maxChildren": 1, "beds": {"pt": "1 cama de casal king", "en": "1 king bed"}, "features": [{"pt": "Casa de banho em pedra granítica à vista", "en": "Exposed granite stone bathroom"}, {"pt": "Zona de estar privativa", "en": "Private sitting area"}, {"pt": "Vista para o pátio histórico", "en": "View over the historic courtyard"}, {"pt": "Cama king e roupa de cama premium", "en": "King bed and premium linen"}, {"pt": "Ar condicionado, piso radiante e Wi-Fi gratuito", "en": "Air conditioning, underfloor heating and free Wi-Fi"}, {"pt": "Pequeno-almoço incluído, servido no quarto a pedido", "en": "Breakfast included, served in the room on request"}], "baseRate": 195, "inventory": 1, "image": "room-sup-2.webp"}], "ratePlans": [{"id": "flexible", "name": {"pt": "Tarifa Flexível", "en": "Flexible Rate"}, "benefit": {"pt": "Cancelamento grátis até 3 dias antes da chegada. Paga o resto na receção.", "en": "Free cancellation until 3 days before arrival. Pay the rest at check-in."}, "priceEffect": {"type": "percentage", "value": 0}, "isDefault": true, "depositPercent": 30, "badge": {"pt": "Mais escolhida", "en": "Most chosen"}, "cancellationPolicy": {"pt": "Cancelamento gratuito até 3 dias antes da chegada. Sinal de 30% reembolsável dentro desse prazo. Restante pago no check-in.", "en": "Free cancellation until 3 days before arrival. The 30% deposit is refundable within that window. The remainder is paid at check-in."}}, {"id": "nonrefundable", "name": {"pt": "Tarifa Não Reembolsável", "en": "Non-refundable Rate"}, "benefit": {"pt": "Poupa 10% ao reservar agora. Sinal não reembolsável.", "en": "Save 10% when you book now. Deposit is non-refundable."}, "priceEffect": {"type": "percentage", "value": -10, "appliesTo": "roomSubtotal"}, "isDefault": false, "depositPercent": 30, "badge": {"pt": "Melhor preço", "en": "Best price"}, "cancellationPolicy": {"pt": "Sem cancelamento nem alterações. O sinal de 30% não é reembolsável em caso de cancelamento ou não comparência.", "en": "No cancellation or changes. The 30% deposit is non-refundable in case of cancellation or no-show."}}, {"id": "welcome", "name": {"pt": "Boas-vindas com Vinho do Porto", "en": "Port Wine Welcome"}, "benefit": {"pt": "Garrafa de Vinho do Porto e tábua de petiscos à chegada. Cancelamento flexível incluído.", "en": "A bottle of Port wine and a snack board on arrival. Flexible cancellation included."}, "priceEffect": {"type": "fixed", "value": 28, "unit": "per stay", "appliesTo": "total"}, "isDefault": false, "depositPercent": 30, "badge": {"pt": "Experiência", "en": "Experience"}, "cancellationPolicy": {"pt": "Cancelamento gratuito até 3 dias antes da chegada, tal como a Tarifa Flexível. O valor das boas-vindas é reembolsável dentro desse prazo.", "en": "Free cancellation until 3 days before arrival, same as the Flexible Rate. The welcome amount is refundable within that window."}}], "extras": [{"id": "airport_transfer", "label": {"pt": "Transfer do aeroporto", "en": "Airport transfer"}, "description": {"pt": "Recolha privada no Aeroporto Francisco Sá Carneiro até à Ribeira, num só sentido.", "en": "Private pick-up from Francisco Sá Carneiro Airport to the Ribeira, one way."}, "price": 35, "unit": "per_stay", "unitLabel": {"pt": "por estadia", "en": "per stay"}, "icon": "🚗"}, {"id": "port_bottle", "label": {"pt": "Garrafa de Vinho do Porto à chegada", "en": "Bottle of Port on arrival"}, "description": {"pt": "Vinho do Porto Tawny de produtor local, à vossa espera no quarto.", "en": "A Tawny Port from a local producer, waiting in your room."}, "price": 22, "unit": "per_stay", "unitLabel": {"pt": "por estadia", "en": "per stay"}, "icon": "🍷"}, {"id": "late_checkout", "label": {"pt": "Check-out tardio (até às 14h)", "en": "Late check-out (until 2pm)"}, "description": {"pt": "Fiquem mais umas horas no quarto, sujeito a disponibilidade.", "en": "Stay a few more hours in your room, subject to availability."}, "price": 25, "unit": "per_stay", "unitLabel": {"pt": "por estadia", "en": "per stay"}, "icon": "🕑"}, {"id": "sunset_walk", "label": {"pt": "Passeio guiado ao pôr do sol na Ribeira", "en": "Guided Ribeira sunset walk"}, "description": {"pt": "Caminhada de uma hora pelas ruelas da Ribeira com um anfitrião local.", "en": "A one hour walk through the Ribeira lanes with a local host."}, "price": 18, "unit": "per_person", "unitLabel": {"pt": "por pessoa", "en": "per person"}, "icon": "🌅"}, {"id": "cellar_tour", "label": {"pt": "Visita a caves de Vinho do Porto", "en": "Port wine cellar tour"}, "description": {"pt": "Reserva de visita com prova numa cave em Vila Nova de Gaia, do outro lado do rio.", "en": "A booked tour with tasting at a cellar in Vila Nova de Gaia, just across the river."}, "price": 30, "unit": "per_person", "unitLabel": {"pt": "por pessoa", "en": "per person"}, "icon": "🏛️"}, {"id": "baby_cot", "label": {"pt": "Berço para bebé", "en": "Baby cot"}, "description": {"pt": "Berço montado no quarto antes da chegada, com roupa de cama incluída.", "en": "A cot set up in your room before arrival, bedding included."}, "price": 15, "unit": "per_stay", "unitLabel": {"pt": "por estadia", "en": "per stay"}, "icon": "🍼"}], "promoCodes": [{"code": "PORTO10", "type": "percentage", "value": 10, "appliesTo": "roomSubtotal", "minNights": 1, "stacksWith": [], "successMessage": {"pt": "Código PORTO10 aplicado. 10% de desconto no alojamento.", "en": "Code PORTO10 applied. 10% off your room."}, "errorMessage": {"pt": "Código inválido ou expirado. Verifique e tente novamente.", "en": "Invalid or expired code. Please check it and try again."}}, {"code": "RIBEIRA25", "type": "fixed", "value": 25, "appliesTo": "roomSubtotal", "minNights": 3, "stacksWith": [], "successMessage": {"pt": "Código RIBEIRA25 aplicado. Menos 25€ no alojamento.", "en": "Code RIBEIRA25 applied. 25€ off your room."}, "errorMessage": {"pt": "Código inválido ou expirado. Verifique e tente novamente.", "en": "Invalid or expired code. Please check it and try again."}, "minNightsError": {"pt": "Código válido apenas para estadias de 3 ou mais noites.", "en": "This code is only valid for stays of 3 nights or more."}}], "seasonMultiplier": {"1": 1, "2": 1, "3": 1.02, "4": 1.04, "5": 1.06, "6": 1.08, "7": 1.1, "8": 1.1, "9": 1.07, "10": 1.04, "11": 1, "12": 1.03}, "weekdayMultiplier": {"0": 1, "1": 1, "2": 1, "3": 1, "4": 1.06, "5": 1.1, "6": 1}, "availability": {"cycles": {"standard": [2, 2, 2, 2, 1, 2, 2, 0, 1], "superior": [2, 2, 2, 1, 2, 0, 1], "suite": [1, 1, 1, 0, 1, 1]}}, "lowAvailabilityIndicator": {"rule": "Badge when min rooms-left across stay <= 2 and >= 1.", "plural": {"pt": "Só restam {n}", "en": "Only {n} left"}, "singular": {"pt": "Só resta 1 (último quarto)", "en": "Only 1 left (last room)"}, "soldOut": {"pt": "Esgotado", "en": "Sold out"}, "colors": {"comfortable_3plus": "#4f6b4a", "low_1to2": "#9a7b3f", "soldOut_disabled": "#8a5a45"}}, "property": {"name": "inPátio Guest House", "address": "Pátio de São Salvador 22, Porto", "whatsapp": "+351 912 000 000", "whatsappPath": "351912000000", "checkInFrom": "15:00", "checkOutUntil": "11:00", "demoToday": "2026-06-01", "cardExpiryDemoToday": "06/26"}, "multibanco": {"entidade": "21845", "referenciaRule": "9 digits, deterministic from booking ref via FNV hash, displayed grouped 3-3-3.", "countdownHours": 24}, "totalRooms": 5};
+const T = {"_comment": "Flat i18n source of truth. fmtMoney(n,locale): pt => n+'€' (symbol after, comma decimals only when non-integer e.g. '81,00€'); en => '€'+n (symbol before, drop trailing .00). No em/en dashes; middle-dot '·' for separators.", "modal.title": {"pt": "Reservar a sua estadia", "en": "Book your stay"}, "modal.subtitle": {"pt": "inPátio Guest House · Ribeira, Porto", "en": "inPátio Guest House · Ribeira, Porto"}, "modal.close": {"pt": "Fechar", "en": "Close"}, "lang.toggle": {"pt": "EN", "en": "PT"}, "demo.banner": {"pt": "Esta é uma demonstração. Nenhum pagamento real é efetuado.", "en": "This is a demo. No real payment is taken."}, "progress.step1": {"pt": "Datas", "en": "Dates"}, "progress.step2": {"pt": "Quarto", "en": "Room"}, "progress.step3": {"pt": "Tarifa", "en": "Rate"}, "progress.step4": {"pt": "Dados e pagamento", "en": "Details and payment"}, "progress.step5": {"pt": "Confirmação", "en": "Confirmation"}, "step1.heading": {"pt": "Quando nos visita?", "en": "When are you visiting?"}, "step1.checkInLabel": {"pt": "Check-in", "en": "Check-in"}, "step1.checkOutLabel": {"pt": "Check-out", "en": "Check-out"}, "step1.datesPlaceholder": {"pt": "Escolha as datas", "en": "Choose your dates"}, "step1.nightsLabel": {"pt": "{n} noites", "en": "{n} nights"}, "step1.nightsSingular": {"pt": "1 noite", "en": "1 night"}, "step1.adultsLabel": {"pt": "Adultos", "en": "Adults"}, "step1.adultsHelper": {"pt": "13 anos ou mais", "en": "Aged 13 or over"}, "step1.childrenLabel": {"pt": "Crianças", "en": "Children"}, "step1.childrenHelper": {"pt": "Menos de 13 anos", "en": "Under 13"}, "step1.childAgeLabel": {"pt": "Idade da criança {i}", "en": "Age of child {i}"}, "step1.checkInTimeNote": {"pt": "Check-in a partir das 15:00", "en": "Check-in from 15:00"}, "step1.checkOutTimeNote": {"pt": "Check-out até às 11:00", "en": "Check-out until 11:00"}, "step2.heading": {"pt": "Escolha o seu quarto", "en": "Choose your room"}, "step2.fromLabel": {"pt": "desde", "en": "from"}, "step2.perNight": {"pt": "por noite", "en": "per night"}, "step2.totalForStay": {"pt": "{total} para {n} noites", "en": "{total} for {n} nights"}, "step2.sizeLabel": {"pt": "{m}m²", "en": "{m}m²"}, "step2.sleepsLabel": {"pt": "Até {a} adultos", "en": "Sleeps up to {a} adults"}, "step2.selectBtn": {"pt": "Escolher este quarto", "en": "Select this room"}, "step2.selectedBtn": {"pt": "Quarto escolhido", "en": "Room selected"}, "step2.featuresTitle": {"pt": "O que inclui", "en": "What is included"}, "step3.heading": {"pt": "Tarifa e extras", "en": "Rate and extras"}, "step3.rateTitle": {"pt": "Escolha a sua tarifa", "en": "Choose your rate"}, "step3.extrasTitle": {"pt": "Adicione um toque especial", "en": "Add a special touch"}, "step3.extrasHelper": {"pt": "Opcional. Pode adicionar ou remover a qualquer momento.", "en": "Optional. Add or remove at any time."}, "step3.promoTitle": {"pt": "Tem um código promocional?", "en": "Have a promo code?"}, "step3.promoPlaceholder": {"pt": "Introduza o código", "en": "Enter your code"}, "step3.promoApply": {"pt": "Aplicar", "en": "Apply"}, "step3.promoRemove": {"pt": "Remover", "en": "Remove"}, "step3.rateDeposit": {"pt": "Sinal de 30%", "en": "30% deposit"}, "step4.guestHeading": {"pt": "Os seus dados", "en": "Your details"}, "step4.paymentHeading": {"pt": "Pagamento do sinal", "en": "Deposit payment"}, "field.fullName": {"pt": "Nome completo", "en": "Full name"}, "field.fullName.ph": {"pt": "Maria Santos", "en": "Maria Santos"}, "field.email": {"pt": "Email", "en": "Email"}, "field.email.ph": {"pt": "maria.santos@email.com", "en": "maria.santos@email.com"}, "field.email.helper": {"pt": "Enviamos a confirmação da reserva para este email.", "en": "We send your booking confirmation to this email."}, "field.phoneCode": {"pt": "Indicativo", "en": "Country code"}, "field.phone": {"pt": "Telemóvel", "en": "Phone"}, "field.phone.ph": {"pt": "912 345 678", "en": "912 345 678"}, "field.country": {"pt": "País de residência", "en": "Country of residence"}, "field.country.ph": {"pt": "Selecione o país", "en": "Select your country"}, "field.arrivalTime": {"pt": "Hora prevista de chegada", "en": "Estimated arrival time"}, "field.arrivalTime.ph": {"pt": "Selecione um intervalo", "en": "Select a time range"}, "field.arrivalTime.helper": {"pt": "Check-in a partir das 15:00. Avise-nos se chegar depois das 22:00.", "en": "Check-in from 15:00. Let us know if you arrive after 22:00."}, "field.specialRequests": {"pt": "Pedidos especiais", "en": "Special requests"}, "field.specialRequests.ph": {"pt": "Cama de casal, chegada tardia, berço, alergias alimentares...", "en": "Double bed, late arrival, baby cot, food allergies..."}, "field.specialRequests.helper": {"pt": "Fazemos o possível por atender, mas os pedidos não são garantidos.", "en": "We do our best to accommodate, but requests are not guaranteed."}, "field.charCounter": {"pt": "{n}/500", "en": "{n}/500"}, "err.fullName": {"pt": "Indique o nome e apelido.", "en": "Please enter your first and last name."}, "err.email": {"pt": "Verifique o endereço de email.", "en": "Please check your email address."}, "err.phoneCode": {"pt": "Selecione o indicativo do país.", "en": "Please select a country code."}, "err.phone": {"pt": "Introduza um número de telemóvel válido.", "en": "Please enter a valid phone number."}, "err.country": {"pt": "Selecione o seu país.", "en": "Please select your country."}, "err.specialRequests": {"pt": "Máximo de 500 caracteres.", "en": "500 characters maximum."}, "err.dates": {"pt": "Escolha as datas de check-in e check-out.", "en": "Please choose check-in and check-out dates."}, "err.sameDay": {"pt": "A estadia tem de ter pelo menos 1 noite.", "en": "Your stay must be at least 1 night."}, "err.noRoom": {"pt": "Escolha um tipo de quarto para continuar.", "en": "Please select a room type to continue."}, "err.occupancy": {"pt": "Este quarto acomoda no máximo {a} adultos e {c} criança.", "en": "This room sleeps at most {a} adults and {c} child."}, "err.soldOutSelection": {"pt": "Este quarto está esgotado em algumas das datas escolhidas. Escolha outras datas ou outro quarto.", "en": "This room is sold out on some of your dates. Please pick other dates or another room."}, "payment.tab.mbway": {"pt": "MB WAY", "en": "MB WAY"}, "payment.tab.card": {"pt": "Cartão", "en": "Card"}, "payment.tab.multibanco": {"pt": "Multibanco", "en": "Multibanco"}, "payment.mbway.desc": {"pt": "Receba um pedido de pagamento na app MB WAY e aprove no telemóvel.", "en": "Get a payment request in your MB WAY app and approve it on your phone."}, "payment.mbway.phoneLabel": {"pt": "Telemóvel MB WAY", "en": "MB WAY phone"}, "payment.mbway.status": {"pt": "Pedido enviado para o seu telemóvel. Abra a app MB WAY e confirme.", "en": "Request sent to your phone. Open the MB WAY app and confirm."}, "payment.mbway.waiting": {"pt": "A aguardar aprovação no telemóvel...", "en": "Waiting for approval on your phone..."}, "payment.mbway.success": {"pt": "Pagamento aprovado. A sua reserva está confirmada.", "en": "Payment approved. Your booking is confirmed."}, "payment.mbway.demoNote": {"pt": "Demonstração: nenhum pagamento real é processado.", "en": "Demo: no real payment is processed."}, "err.mbwayPhone": {"pt": "Introduza um número MB WAY válido (9 dígitos).", "en": "Enter a valid MB WAY number (9 digits)."}, "payment.card.desc": {"pt": "Visa ou Mastercard. Os seus dados não são guardados.", "en": "Visa or Mastercard. Your details are never stored."}, "payment.card.number": {"pt": "Número do cartão", "en": "Card number"}, "payment.card.expiry": {"pt": "Validade", "en": "Expiry"}, "payment.card.expiry.ph": {"pt": "MM/AA", "en": "MM/YY"}, "payment.card.cvc": {"pt": "CVC", "en": "CVC"}, "payment.card.name": {"pt": "Nome no cartão", "en": "Name on card"}, "payment.card.processing": {"pt": "A processar o pagamento de forma segura...", "en": "Securely processing your payment..."}, "payment.card.success": {"pt": "Pagamento aprovado. A sua reserva está confirmada.", "en": "Payment approved. Your booking is confirmed."}, "payment.card.demoNote": {"pt": "Demonstração: cartão fictício, nenhum pagamento real é processado.", "en": "Demo: dummy card, no real payment is processed."}, "err.cardNumber": {"pt": "O número do cartão deve ter 16 dígitos.", "en": "Card number must be 16 digits."}, "err.cardExpiry": {"pt": "Data de validade inválida.", "en": "Invalid expiry date."}, "err.cardCvc": {"pt": "O CVC deve ter 3 dígitos.", "en": "CVC must be 3 digits."}, "err.cardName": {"pt": "Introduza o nome impresso no cartão.", "en": "Enter the name printed on the card."}, "payment.mb.desc": {"pt": "Geramos uma referência para pagar no Multibanco ou no homebanking.", "en": "We generate a reference to pay at an ATM or via online banking."}, "payment.mb.entidade": {"pt": "Entidade", "en": "Entity"}, "payment.mb.referencia": {"pt": "Referência", "en": "Reference"}, "payment.mb.valor": {"pt": "Valor", "en": "Amount"}, "payment.mb.copy": {"pt": "Copiar referência", "en": "Copy reference"}, "payment.mb.copied": {"pt": "Referência copiada", "en": "Reference copied"}, "payment.mb.instruction": {"pt": "Pague esta referência nas próximas 24 horas para garantir a reserva. Receberá a confirmação por email.", "en": "Pay this reference within 24 hours to secure your booking. You will receive confirmation by email."}, "payment.mb.countdown": {"pt": "Expira em {h}h {m}m", "en": "Expires in {h}h {m}m"}, "payment.mb.pending": {"pt": "Reserva a aguardar pagamento Multibanco.", "en": "Booking awaiting Multibanco payment."}, "payment.mb.success": {"pt": "Pagamento recebido. A sua reserva está confirmada.", "en": "Payment received. Your booking is confirmed."}, "payment.mb.demoNote": {"pt": "Demonstração: referência fictícia, não efetue qualquer pagamento.", "en": "Demo: dummy reference, do not make any real payment."}, "payment.mb.demoMarkPaid": {"pt": "Simular pagamento recebido (demo)", "en": "Simulate payment received (demo)"}, "deposit.headline": {"pt": "Pague apenas 30% agora", "en": "Pay just 30% now"}, "deposit.body": {"pt": "Paga 30% do total como sinal para garantir a reserva. O restante é pago no check-in, na propriedade.", "en": "You pay a 30% deposit now to secure your booking. The balance is paid at check-in, at the property."}, "btn.continueRoom": {"pt": "Continuar para o quarto", "en": "Continue to room"}, "btn.continueRate": {"pt": "Continuar para a tarifa", "en": "Continue to rate"}, "btn.continueDetails": {"pt": "Continuar para os dados", "en": "Continue to details"}, "btn.backDates": {"pt": "Voltar às datas", "en": "Back to dates"}, "btn.backRoom": {"pt": "Voltar ao quarto", "en": "Back to room"}, "btn.backRate": {"pt": "Voltar à tarifa", "en": "Back to rate"}, "btn.payDeposit": {"pt": "Pagar sinal de 30%", "en": "Pay 30% deposit"}, "btn.payDepositAmount": {"pt": "Pagar sinal · {amount}", "en": "Pay deposit · {amount}"}, "btn.generateMb": {"pt": "Gerar referência Multibanco", "en": "Generate Multibanco reference"}, "btn.done": {"pt": "Concluir", "en": "Done"}, "trust.bestPrice": {"pt": "Melhor preço garantido na reserva direta", "en": "Best price guaranteed on direct booking"}, "trust.bestPrice.tip": {"pt": "Reserve connosco e paga sempre o melhor valor, sem comissões de plataformas.", "en": "Book with us and you always pay the best rate, with no platform commissions."}, "trust.securePayment": {"pt": "Pagamento seguro", "en": "Secure payment"}, "trust.securePayment.tip": {"pt": "Os seus dados são encriptados. Aceitamos MB WAY, cartão e referência Multibanco.", "en": "Your details are encrypted. We accept MB WAY, card and Multibanco reference."}, "trust.freeCancellation": {"pt": "Cancelamento gratuito até 3 dias antes", "en": "Free cancellation up to 3 days before"}, "trust.freeCancellation.tip": {"pt": "Com a Tarifa Flexível, cancela sem custos até 3 dias antes da chegada e o sinal é devolvido.", "en": "With the Flexible Rate, cancel free of charge up to 3 days before arrival and your deposit is refunded."}, "trust.noHiddenFees": {"pt": "Sem custos escondidos", "en": "No hidden fees"}, "trust.noHiddenFees.tip": {"pt": "O valor que vê já inclui tudo, exceto a taxa turística municipal mostrada à parte.", "en": "The price you see includes everything, except the municipal tourist tax shown separately."}, "trust.instantConfirmation": {"pt": "Confirmação imediata", "en": "Instant confirmation"}, "trust.instantConfirmation.tip": {"pt": "Recebe a confirmação e a referência por email assim que reserva.", "en": "You get your confirmation and reference by email the moment you book."}, "trust.directHost": {"pt": "Fale diretamente com os anfitriões", "en": "Talk directly with your hosts"}, "trust.directHost.tip": {"pt": "Somos uma casa de 5 quartos. Respondemos sempre nós diretamente.", "en": "We are a 5 room house. You always reach us directly."}, "trust.ssl": {"pt": "Pagamento seguro com encriptação SSL. Não guardamos os dados do seu cartão.", "en": "Secure SSL-encrypted payment. We never store your card details."}, "scarcity.viewers": {"pt": "{n} pessoas estão a ver estas datas agora", "en": "{n} people are looking at these dates right now"}, "scarcity.lastBooked": {"pt": "Última reserva há {h} horas", "en": "Last booked {h} hours ago"}, "scarcity.lastBookedSingular": {"pt": "Última reserva há 1 hora", "en": "Last booked 1 hour ago"}, "scarcity.roomsLeft": {"pt": "Só resta {r} quarto deste tipo para as suas datas", "en": "Only {r} room of this type left for your dates"}, "scarcity.roomsLeftPlural": {"pt": "Só restam {r} quartos deste tipo para as suas datas", "en": "Only {r} rooms of this type left for your dates"}, "scarcity.depositSecures": {"pt": "Garanta a sua estadia com 30% agora, o resto paga no check-in", "en": "Secure your stay with 30% now, pay the rest at check-in"}, "social.badge": {"pt": "5,0 no TripAdvisor", "en": "5.0 on TripAdvisor"}, "social.rank": {"pt": "N.º 1 entre as casas de hóspedes no Porto", "en": "Number 1 guest house in Porto"}, "social.reviews": {"pt": "127 avaliações", "en": "127 reviews"}, "social.micro": {"pt": "Recomendado por 98% dos hóspedes", "en": "Recommended by 98% of guests"}, "social.quote": {"pt": "\"A melhor vista da Ribeira e anfitriões que nos fizeram sentir em casa. Voltamos de certeza.\"", "en": "\"The best view over the Ribeira and hosts who made us feel at home. We will definitely return.\""}, "social.quoteAttribution": {"pt": "Sofia M., Lisboa · viajou em casal", "en": "Sofia M., Lisbon · couple's trip"}, "confirm.headline": {"pt": "A sua reserva está confirmada", "en": "Your booking is confirmed"}, "confirm.subtext": {"pt": "Guardámos o seu quarto na Ribeira. Enviámos todos os detalhes para o seu email, fique apenas à espera de nós.", "en": "We have saved your room in the Ribeira. We have sent all the details to your email, so just sit back and wait to hear from us."}, "confirm.refLabel": {"pt": "Referência da reserva", "en": "Booking reference"}, "confirm.copyRef": {"pt": "Copiar referência", "en": "Copy reference"}, "confirm.refCopied": {"pt": "Referência copiada", "en": "Reference copied"}, "confirm.occupancyLine": {"pt": "{guests} hóspedes · {nights} noites", "en": "{guests} guests · {nights} nights"}, "confirm.checkInLabel": {"pt": "Check-in", "en": "Check-in"}, "confirm.checkInNote": {"pt": "a partir das 15:00", "en": "from 15:00"}, "confirm.checkOutLabel": {"pt": "Check-out", "en": "Check-out"}, "confirm.checkOutNote": {"pt": "até às 11:00", "en": "until 11:00"}, "confirm.depositPaid": {"pt": "Sinal de {deposit} pago (30%)", "en": "{deposit} deposit paid (30%)"}, "confirm.remainder": {"pt": "Os restantes {remainder} são pagos no check-in. Sem cobranças surpresa.", "en": "The remaining {remainder} is paid at check-in. No surprise charges."}, "confirm.demoDisclaimer": {"pt": "Demonstração, sem pagamentos reais.", "en": "Demo only, no real payments."}, "confirm.whatNext.title": {"pt": "O que se segue", "en": "What happens next"}, "confirm.next1.title": {"pt": "Email de confirmação enviado", "en": "Confirmation email sent"}, "confirm.next1.detail": {"pt": "Com a referência e a morada exata.", "en": "With your reference and the exact address."}, "confirm.next2.title": {"pt": "Preparamos o seu quarto", "en": "We prepare your room"}, "confirm.next2.detail": {"pt": "Tudo pronto para a sua chegada.", "en": "Everything ready for your arrival."}, "confirm.next3.title": {"pt": "Fale connosco quando quiser", "en": "Message us anytime"}, "confirm.next3.detail": {"pt": "Estamos no WhatsApp para qualquer pedido.", "en": "We are on WhatsApp for any request."}, "confirm.addToCalendar": {"pt": "Adicionar ao calendário", "en": "Add to calendar"}, "confirm.whatsapp": {"pt": "Falar connosco", "en": "Message us"}, "confirm.manage": {"pt": "Gerir reserva", "en": "Manage booking"}, "confirm.manage.hint": {"pt": "Veja ou altere os seus detalhes com a referência {ref}.", "en": "View or change your details using reference {ref}."}, "manage.earlyCheckin": {"pt": "Pedir check-in antecipado", "en": "Request early check-in"}, "manage.addRequest": {"pt": "Adicionar pedido especial", "en": "Add a special request"}, "manage.cancel": {"pt": "Cancelar reserva", "en": "Cancel booking"}, "confirm.demoBanner": {"pt": "Demonstração inPátio · sem pagamentos reais", "en": "inPátio demo · no real payments"}, "whatsapp.prefill": {"pt": "Olá! Acabei de reservar na inPátio (ref. {ref}). Tenho uma pergunta sobre a minha estadia.", "en": "Hi! I just booked at inPátio (ref. {ref}). I have a question about my stay."}};
+const REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const BK = (function(){
+  let lg='pt';
+  const COUNTRIES=[['PT','Portugal','Portugal'],['ES','Espanha','Spain'],['FR','França','France'],['GB','Reino Unido','United Kingdom'],['DE','Alemanha','Germany'],['IT','Itália','Italy'],['NL','Países Baixos','Netherlands'],['BE','Bélgica','Belgium'],['IE','Irlanda','Ireland'],['CH','Suíça','Switzerland'],['US','Estados Unidos','United States'],['BR','Brasil','Brazil'],['OT','Outro','Other']];
+  const ARR=[['lt15','Antes das 15:00','Before 15:00'],['15-17','15:00 às 17:00','15:00 to 17:00'],['17-19','17:00 às 19:00','17:00 to 19:00'],['19-21','19:00 às 21:00','19:00 to 21:00'],['21-22','21:00 às 22:00','21:00 to 22:00'],['gt22','Depois das 22:00','After 22:00']];
+  const S={ step:1, checkIn:new Date(2026,6,17), checkOut:new Date(2026,6,20), nights:3, adults:2, children:0, childAges:[],
+    roomType:null, ratePlan:'flexible', extras:[], promo:null,
+    guest:{}, paymentMethod:'mbway', paymentStatus:'idle', bookingRef:null, bookingStatus:'in_progress', c:{} };
+  let cal=null, prevTotal=0, prevDep=0, scarSeen={};
+
+  /* ---- helpers ---- */
+  function t(k,v){ let s=(T[k]&&T[k][lg])||k; if(v) for(const x in v) s=s.replace(new RegExp('\\{'+x+'\\}','g'),v[x]); return s; }
+  function money(n){ n=Math.round(n); return lg==='en'?('€'+n):(n+'€'); }
+  function roomById(id){ return DATA.roomTypes.find(r=>r.id===id); }
+  function rateById(id){ return DATA.ratePlans.find(r=>r.id===id); }
+  function extraById(id){ return DATA.extras.find(e=>e.id===id); }
+  function pad(n,l){ n=''+n; while(n.length<l) n='0'+n; return n; }
+  function fnv(str){ let h=0x811c9dc5; for(let i=0;i<str.length;i++){ h^=str.charCodeAt(i); h=Math.imul(h,0x01000193); } return (h>>>0); }
+  function nightsBetween(a,b){ return Math.max(0,Math.round((b-a)/86400000)); }
+  function eachNight(cb){ for(let d=new Date(S.checkIn); d<S.checkOut; d.setDate(d.getDate()+1)) cb(new Date(d)); }
+  function nightly(base,d){ const m=d.getMonth()+1, wd=(d.getDay()+6)%7; return Math.round(base*DATA.seasonMultiplier[m]*DATA.weekdayMultiplier[wd]); }
+  function doy(d){ return Math.floor((Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())-Date.UTC(d.getFullYear(),0,0))/86400000); }
+  function roomsLeftOn(id,d){ const cyc=DATA.availability.cycles[id]; const v=cyc[((doy(d)%cyc.length)+cyc.length)%cyc.length]; return Math.min(v, roomById(id).inventory); }
+  function minRoomsLeft(id){ if(!S.checkIn||!S.checkOut||S.nights<=0) return roomById(id).inventory; let m=Infinity; eachNight(d=>{ m=Math.min(m,roomsLeftOn(id,d)); }); return m===Infinity?roomById(id).inventory:m; }
+  function fromPrice(id){ const base=roomById(id).baseRate; let m=Infinity; if(S.nights>0){ eachNight(d=>{ m=Math.min(m,nightly(base,d)); }); } else { m=nightly(base,S.checkIn||new Date(2026,6,10)); } return m; }
+  function fmtDatePt(d){ return d.toLocaleDateString('pt-PT',{day:'numeric',month:'long'}); }
+  function fmtDateEn(d){ return d.toLocaleDateString('en-GB',{day:'numeric',month:'long'}); }
+  function fmtWeekday(d){ return d.toLocaleDateString(lg==='en'?'en-GB':'pt-PT',{weekday:'long'}); }
+  function isoLocal(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1,2)+'-'+pad(d.getDate(),2); }
+
+  /* ---- compute ---- */
+  function recalc(){
+    const c={perNight:[],extraLines:[]}; const rt=roomById(S.roomType);
+    if(!rt||S.nights<=0){ c.total=0;c.depositDueNow=0;c.roomSubtotal=0;c.cityTax=0;c.extrasTotal=0; S.c=c; return; }
+    eachNight(d=>c.perNight.push({d:new Date(d),p:nightly(rt.baseRate,d)}));
+    c.roomSubtotalRaw=c.perNight.reduce((a,n)=>a+n.p,0);
+    c.afterRate = S.ratePlan==='nonrefundable'?Math.round(c.roomSubtotalRaw*0.9):c.roomSubtotalRaw;
+    c.ratePlanDiscount=c.roomSubtotalRaw-c.afterRate;
+    c.promoDiscount=0;
+    if(S.promo&&S.promo.valid){ c.promoDiscount = S.promo.type==='percentage'?Math.round(c.afterRate*S.promo.value/100):S.promo.value; c.promoDiscount=Math.min(c.promoDiscount,c.afterRate); }
+    c.roomSubtotal=c.afterRate-c.promoDiscount;
+    const guests=S.adults+S.children;
+    S.extras.forEach(id=>{ const e=extraById(id); const lt=e.unit==='per_stay'?e.price:e.price*guests; c.extraLines.push({e,lt,count:guests}); });
+    c.extrasTotal=c.extraLines.reduce((a,x)=>a+x.lt,0);
+    c.welcomeBundle=S.ratePlan==='welcome'?28:0;
+    c.taxableGuests=S.adults + S.childAges.filter(a=>a>=13).length;
+    c.taxNights=Math.min(S.nights,7);
+    c.cityTax=2*c.taxableGuests*c.taxNights;
+    c.total=c.roomSubtotal+c.extrasTotal+c.welcomeBundle+c.cityTax;
+    c.depositDueNow=Math.round(c.total*0.3);
+    c.balanceAtCheckin=c.total-c.depositDueNow;
+    S.c=c;
+  }
+
+  /* ---- count-up ---- */
+  function countUp(el,to,suffixBefore){
+    const from=parseInt(el.getAttribute('data-v')||'0',10)||0;
+    el.setAttribute('data-v',to);
+    if(REDUCE||from===to){ el.textContent=money(to); return; }
+    el.classList.remove('up','down'); void el.offsetWidth; el.classList.add(to>from?'up':'down');
+    const start=performance.now(), dur=450;
+    function step(now){ let p=Math.min(1,(now-start)/dur); p=1-Math.pow(1-p,3); const val=Math.round(from+(to-from)*p); el.textContent=money(val); if(p<1) requestAnimationFrame(step); else { el.textContent=money(to); setTimeout(()=>el.classList.remove('up','down'),250); } }
+    requestAnimationFrame(step);
+  }
+
+  /* ---- progress steps ---- */
+  function renderSteps(){
+    const labels=['progress.step1','progress.step2','progress.step3','progress.step4','progress.step5'];
+    let h='';
+    labels.forEach((k,i)=>{ const n=i+1; const cls=n===S.step?'on':(n<S.step?'done':''); h+=`<div class="stp ${cls}"><div class="n">${n<S.step?'✓':n}</div><span>${t(k)}</span></div>`; });
+    document.getElementById('bk-steps').innerHTML=h;
+  }
+
+  /* ---- scarcity helpers (deterministic) ---- */
+  function viewersCount(){ if(S.nights<=0) return 0; const h=fnv(isoLocal(S.checkIn)+isoLocal(S.checkOut)); return 3+(h%6); }
+  function lastBookedHours(){ const h=fnv('lb'+isoLocal(S.checkIn)); return 1+(h%9); }
+
+  /* ---- STEP 1 : dates + guests ---- */
+  function step1(){
+    const soldAllTypes=[];
+    return `
+    <h2 class="bk-h">${t('step1.heading')}</h2>
+    <p class="bk-sub2">${t('modal.subtitle')}</p>
+    <div id="bk-cal-wrap"><input id="bk-cal" class="cal-input" type="text"></div>
+    <div class="bk-timenotes">
+      <span>🕒 ${t('step1.checkInTimeNote')}</span><span>🚪 ${t('step1.checkOutTimeNote')}</span>
+    </div>
+    <div class="bk-guests">
+      <div class="bk-gcard">
+        <div><div class="gl">${t('step1.adultsLabel')}</div><div class="gh">${t('step1.adultsHelper')}</div></div>
+        <div class="bk-step"><button class="bk-rnd" ${S.adults<=1?'disabled':''} onclick="BK.adults(-1)">−</button><span class="bk-rnd-val" id="bk-adults">${S.adults}</span><button class="bk-rnd" ${S.adults>=3?'disabled':''} onclick="BK.adults(1)">+</button></div>
+      </div>
+      <div class="bk-gcard">
+        <div><div class="gl">${t('step1.childrenLabel')}</div><div class="gh">${t('step1.childrenHelper')}</div></div>
+        <div class="bk-step"><button class="bk-rnd" ${S.children<=0?'disabled':''} onclick="BK.children(-1)">−</button><span class="bk-rnd-val" id="bk-children">${S.children}</span><button class="bk-rnd" ${S.children>=1?'disabled':''} onclick="BK.children(1)">+</button></div>
+      </div>
+    </div>
+    <div class="bk-childages" id="bk-childages">${childAgesHTML()}</div>
+    <div class="bk-scar" id="bk-scar">${scarHTML()}</div>
+    <div class="bk-trust">${trustChipsHTML(['bestPrice','freeCancellation','instantConfirmation'])}</div>`;
+  }
+  function childAgesHTML(){
+    if(S.children<=0) return '';
+    let h='';
+    for(let i=0;i<S.children;i++){ const age=S.childAges[i]==null?8:S.childAges[i];
+      let opts=''; for(let a=0;a<=17;a++) opts+=`<option value="${a}" ${a===age?'selected':''}>${a}</option>`;
+      h+=`<div class="fld"><label>${t('step1.childAgeLabel',{i:i+1})}</label><select onchange="BK.childAge(${i},this.value)">${opts}</select></div>`; }
+    return h;
+  }
+  function scarHTML(){
+    if(S.nights<=0) return '';
+    const v=viewersCount(), lb=lastBookedHours();
+    const fresh = !scarSeen.s1; scarSeen.s1=true;
+    const pc = fresh && !REDUCE ? 'pulse':'';
+    return `<div class="bk-scarline live ${pc}"><span class="dot"></span>${t('scarcity.viewers',{n:v})}</div>
+      <div class="bk-scarline"><span class="si">🔔</span>${lb===1?t('scarcity.lastBookedSingular'):t('scarcity.lastBooked',{h:lb})}</div>`;
+  }
+  function initCal(){
+    if(typeof flatpickr==='undefined') return;
+    try{
+      const fullDays=[]; // all-three-types sold out
+      cal=flatpickr('#bk-cal',{inline:true,mode:'range',minDate:'2026-06-16',defaultDate:[isoLocal(S.checkIn),isoLocal(S.checkOut)],
+        locale: lg==='pt'?(flatpickr.l10ns.pt||flatpickr.l10ns.default):flatpickr.l10ns.default,
+        disable:[ function(d){ return roomsLeftOn('standard',d)===0 && roomsLeftOn('superior',d)===0 && roomsLeftOn('suite',d)===0; } ],
+        onChange:(sel)=>{ if(sel.length===2){ S.checkIn=sel[0]; S.checkOut=sel[1]; S.nights=nightsBetween(sel[0],sel[1]);
+          if(S.roomType && minRoomsLeft(S.roomType)<=0){ S.roomType=null; }
+          recalc(); document.getElementById('bk-scar').innerHTML=scarHTML(); renderFoot(); } } });
+    }catch(e){}
+  }
+
+  /* ---- STEP 2 : room ---- */
+  function step2(){
+    let cards='';
+    DATA.roomTypes.forEach(rt=>{
+      const left=minRoomsLeft(rt.id); const sold=left<=0;
+      const occ = S.adults>rt.maxAdults || S.children>rt.maxChildren;
+      const dis = sold||occ;
+      const fp=fromPrice(rt.id), stayTotal=stayTotalFor(rt.id);
+      const pct=Math.round((Math.max(0,left)/rt.inventory)*100);
+      let barColor=DATA.lowAvailabilityIndicator.colors.comfortable_3plus;
+      let badge='';
+      if(sold){ badge=`<span class="rleft" style="background:${DATA.lowAvailabilityIndicator.colors.soldOut_disabled}">${DATA.lowAvailabilityIndicator.soldOut[lg]}</span>`; barColor=DATA.lowAvailabilityIndicator.colors.soldOut_disabled; }
+      else if(left<=2){ barColor=DATA.lowAvailabilityIndicator.colors.low_1to2; badge=`<span class="rleft" style="background:${barColor}">${left===1?DATA.lowAvailabilityIndicator.singular[lg]:DATA.lowAvailabilityIndicator.plural[lg].replace('{n}',left)}</span>`; }
+      cards+=`<div class="bk-room ${S.roomType===rt.id?'sel':''} ${dis?'dis':''}">
+        <div class="bk-check">✓</div>
+        <div class="rimg"><img src="img/${rt.image}" alt="" loading="lazy" decoding="async">${badge}</div>
+        <div class="rbody">
+          <h4>${rt.name[lg]}</h4>
+          <p class="rtag">${rt.tagline[lg]}</p>
+          <div class="rmeta"><span>${t('step2.sizeLabel',{m:rt.sizeM2})}</span><span>${t('step2.sleepsLabel',{a:rt.maxAdults})}</span><span>${rt.beds[lg]}</span></div>
+          <div class="bk-avail"><i class="fill" style="width:${sold?100:pct}%;background:${barColor}"></i></div>
+          <div class="rfoot">
+            <div class="rprice"><div class="pf">${t('step2.fromLabel')}</div><div><span class="pv">${money(fp)}</span> <span class="pn">${t('step2.perNight')}</span></div>${S.nights>0&&!sold?`<div class="pt2">${t('step2.totalForStay',{total:money(stayTotal),n:S.nights})}</div>`:''}</div>
+            <button class="bk-selbtn" ${dis?'disabled':''} onclick="BK.selectRoom('${rt.id}')">${S.roomType===rt.id?t('step2.selectedBtn'):(sold?DATA.lowAvailabilityIndicator.soldOut[lg]:(occ?t('step2.sleepsLabel',{a:rt.maxAdults}):t('step2.selectBtn')))}</button>
+          </div>
+        </div>
+      </div>`;
+    });
+    return `<h2 class="bk-h">${t('step2.heading')}</h2>
+      <div class="bk-social">
+        <div class="ta"><div class="stars">★★★★★</div><div class="srank">${t('social.badge')} · ${t('social.rank')}</div></div>
+      </div>
+      <div class="bk-rooms">${cards}</div>`;
+  }
+  function stayTotalFor(id){ const rt=roomById(id); let s=0; eachNight(d=>s+=nightly(rt.baseRate,d)); return s; }
+
+  /* ---- STEP 3 : rate + extras + promo ---- */
+  function step3(){
+    let rates='';
+    DATA.ratePlans.forEach(rp=>{
+      const sel=S.ratePlan===rp.id;
+      let priceTxt='';
+      if(rp.id==='flexible') priceTxt=`<div class="rprice free">${t('step3.rateDeposit')}</div>`;
+      else if(rp.id==='nonrefundable') priceTxt=`<div class="rprice free">${lg==='en'?'Save 10%':'Poupa 10%'}</div>`;
+      else priceTxt=`<div class="rprice">+${money(28)}</div>`;
+      rates+=`<div class="bk-rate ${sel?'sel':''}" onclick="BK.setRate('${rp.id}')">
+        <span class="rbadge">${rp.badge[lg]}</span>
+        <div class="rn">${rp.name[lg]}</div>
+        <div class="rb">${rp.benefit[lg]}</div>
+        ${priceTxt}
+      </div>`;
+    });
+    let extras='';
+    DATA.extras.forEach(e=>{ const on=S.extras.includes(e.id);
+      extras+=`<div class="bk-extra ${on?'on':''}">
+        <div class="ex-ic">${e.icon}</div>
+        <div class="ex-b"><div class="ex-t">${e.label[lg]}</div><div class="ex-d">${e.description[lg]}</div></div>
+        <div class="ex-p">${money(e.price)}<small>${e.unitLabel[lg]}</small></div>
+        <button class="bk-tog" aria-label="toggle" onclick="BK.toggleExtra('${e.id}')"></button>
+      </div>`; });
+    return `<h2 class="bk-h">${t('step3.heading')}</h2>
+      <h3 style="font-size:14px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin:6px 0 10px">${t('step3.rateTitle')}</h3>
+      <div class="bk-rates">${rates}</div>
+      <h3 style="font-size:14px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin:20px 0 4px">${t('step3.extrasTitle')}</h3>
+      <p class="bk-sub2" style="margin:0 0 12px">${t('step3.extrasHelper')}</p>
+      <div class="bk-extras">${extras}</div>
+      <div class="bk-promo">
+        <div style="font-weight:600;font-size:14px">${t('step3.promoTitle')}</div>
+        <div id="bk-promo-box">${promoBoxHTML()}</div>
+      </div>
+      ${summaryHTML()}`;
+  }
+  function promoBoxHTML(){
+    if(S.promo&&S.promo.valid){ return `<div class="bk-promo-chip">✓ ${S.promo.code} <button onclick="BK.removePromo()">${t('step3.promoRemove')}</button></div>`; }
+    return `<div class="bk-promo-row"><input id="bk-promo-in" placeholder="${t('step3.promoPlaceholder')}" value="${S.promo&&!S.promo.valid?S.promo.code:''}"><button class="btn btn-azu" onclick="BK.applyPromo()">${t('step3.promoApply')}</button></div>
+      <div class="bk-promo-msg ${S.promo&&!S.promo.valid?'bad':''}" id="bk-promo-msg">${S.promo&&!S.promo.valid?S.promo.msg:''}</div>`;
+  }
+
+  /* ---- STEP 4 : guest + payment ---- */
+  function step4(){
+    const g=S.guest;
+    let countries=`<option value="">${t('field.country.ph')}</option>`;
+    COUNTRIES.forEach(c=>countries+=`<option value="${c[0]}" ${g.country===c[0]?'selected':''}>${lg==='en'?c[2]:c[1]}</option>`);
+    let arr=`<option value="">${t('field.arrivalTime.ph')}</option>`;
+    ARR.forEach(a=>arr+=`<option value="${a[0]}" ${g.arrival===a[0]?'selected':''}>${lg==='en'?a[2]:a[1]}</option>`);
+    return `<h2 class="bk-h">${t('step4.guestHeading')}</h2>
+      <div class="bk-form">
+        <div class="bk-field full" data-f="fullName"><label>${t('field.fullName')}</label><input id="g-name" value="${g.fullName||''}" placeholder="${t('field.fullName.ph')}"><div class="ferr">${t('err.fullName')}</div></div>
+        <div class="bk-field full" data-f="email"><label>${t('field.email')}</label><input id="g-email" type="email" value="${g.email||''}" placeholder="${t('field.email.ph')}"><div class="fhelp">${t('field.email.helper')}</div><div class="ferr">${t('err.email')}</div></div>
+        <div class="bk-field full" data-f="phone"><label>${t('field.phone')}</label>
+          <div class="bk-phone"><input id="g-code" value="${g.phoneCode||'+351'}" aria-label="${t('field.phoneCode')}"><input id="g-phone" value="${g.phone||''}" placeholder="${t('field.phone.ph')}"></div>
+          <div class="ferr">${t('err.phone')}</div></div>
+        <div class="bk-field" data-f="country"><label>${t('field.country')}</label><select id="g-country">${countries}</select><div class="ferr">${t('err.country')}</div></div>
+        <div class="bk-field" data-f="arrival"><label>${t('field.arrivalTime')}</label><select id="g-arrival">${arr}</select><div class="fhelp">${t('field.arrivalTime.helper')}</div></div>
+        <div class="bk-field full" data-f="requests"><label>${t('field.specialRequests')}</label><textarea id="g-req" maxlength="500" placeholder="${t('field.specialRequests.ph')}">${g.requests||''}</textarea><div class="fhelp">${t('field.specialRequests.helper')}</div></div>
+      </div>
+      <h2 class="bk-pay-head">${t('step4.paymentHeading')}</h2>
+      <div class="bk-deposit"><div class="dh">🔒 ${t('deposit.headline')} · ${money(S.c.depositDueNow)}</div><div class="db">${t('deposit.body')}</div></div>
+      <div class="bk-paytabs">
+        <div class="bk-paytab ${S.paymentMethod==='mbway'?'on':''}" data-m="mbway" onclick="BK.setPay('mbway')">📱 ${t('payment.tab.mbway')}</div>
+        <div class="bk-paytab ${S.paymentMethod==='card'?'on':''}" data-m="card" onclick="BK.setPay('card')">💳 ${t('payment.tab.card')}</div>
+        <div class="bk-paytab ${S.paymentMethod==='multibanco'?'on':''}" data-m="multibanco" onclick="BK.setPay('multibanco')">🏧 ${t('payment.tab.multibanco')}</div>
+      </div>
+      <div class="bk-paypanel" id="bk-paypanel">${payPanel()}</div>
+      <div class="bk-trustline">🔒 ${t('trust.ssl')}</div>
+      ${summaryHTML()}`;
+  }
+  function payPanel(){
+    if(S.paymentMethod==='mbway'){
+      return `<p class="bk-paydesc">${t('payment.mbway.desc')}</p>
+        <div class="bk-field rel" data-f="mbphone"><label>${t('payment.mbway.phoneLabel')}</label><input id="p-mbphone" value="${S.guest.phone||''}" placeholder="${t('field.phone.ph')}"><div class="ferr">${t('err.mbwayPhone')}</div></div>
+        <p class="bk-paydesc" style="margin:10px 0 0">${t('payment.mbway.demoNote')}</p>`;
+    }
+    if(S.paymentMethod==='card'){
+      return `<p class="bk-paydesc">${t('payment.card.desc')}</p>
+        <div class="bk-field rel full" data-f="cardNumber"><label>${t('payment.card.number')}</label><input id="p-cardnum" inputmode="numeric" placeholder="4242 4242 4242 4242" oninput="BK.fmtCard(this)"><span class="bk-cardbrand" id="p-brand"></span><div class="ferr">${t('err.cardNumber')}</div></div>
+        <div class="bk-form" style="margin-top:13px">
+          <div class="bk-field" data-f="cardExpiry"><label>${t('payment.card.expiry')}</label><input id="p-exp" placeholder="${t('payment.card.expiry.ph')}" oninput="BK.fmtExp(this)"><div class="ferr">${t('err.cardExpiry')}</div></div>
+          <div class="bk-field" data-f="cardCvc"><label>${t('payment.card.cvc')}</label><input id="p-cvc" inputmode="numeric" maxlength="3" placeholder="123"><div class="ferr">${t('err.cardCvc')}</div></div>
+          <div class="bk-field full" data-f="cardName"><label>${t('payment.card.name')}</label><input id="p-cardname" value="${S.guest.fullName||''}"><div class="ferr">${t('err.cardName')}</div></div>
+        </div>
+        <p class="bk-paydesc" style="margin:11px 0 0">${t('payment.card.demoNote')}</p>`;
+    }
+    return `<p class="bk-paydesc">${t('payment.mb.desc')}</p>
+      <p class="bk-paydesc" style="margin:0">${t('payment.mb.demoNote')}</p>`;
+  }
+
+  /* ---- summary ---- */
+  function summaryHTML(){
+    const c=S.c; if(!c||!c.total){ return ''; }
+    const rt=roomById(S.roomType);
+    let lines='';
+    c.perNight.forEach(n=>{ const lab=lg==='en'?`${fmtWeekday(n.d)} night, ${fmtDateEn(n.d)}`:`Noite de ${fmtWeekday(n.d)}, ${fmtDatePt(n.d)}`; lines+=`<div class="bk-sum-r" style="font-size:12.5px;color:var(--muted)"><span>${cap(lab)}</span><span>${money(n.p)}</span></div>`; });
+    let h=`<div class="bk-summary"><div class="sh">${rt?rt.name[lg]:''}</div>${lines}
+      <div class="bk-sum-r"><span>${lg==='en'?'Room subtotal':'Subtotal das noites'}</span><span>${money(c.roomSubtotalRaw)}</span></div>
+      <div class="bk-sum-r sub"><span>${t('step1.'+(S.nights===1?'nightsSingular':'nightsLabel'),{n:S.nights})}, ${rt?rt.name[lg]:''}</span><span></span></div>`;
+    if(S.ratePlan==='nonrefundable') h+=`<div class="bk-sum-r disc"><span>${lg==='en'?'Non-refundable rate (-10%)':'Tarifa não reembolsável (-10%)'}</span><span>-${money(c.ratePlanDiscount)}</span></div>`;
+    if(S.promo&&S.promo.valid) h+=`<div class="bk-sum-r disc"><span>${lg==='en'?'Code':'Código'} ${S.promo.code}</span><span>-${money(c.promoDiscount)}</span></div>`;
+    c.extraLines.forEach(x=>{ const sfx=x.e.unit==='per_person'?` (x${x.count})`:''; h+=`<div class="bk-sum-r"><span>${x.e.label[lg]}${sfx}</span><span>${money(x.lt)}</span></div>`; });
+    if(c.welcomeBundle) h+=`<div class="bk-sum-r"><span>${lg==='en'?'Port Wine Welcome':'Boas-vindas com Vinho do Porto'}</span><span>${money(c.welcomeBundle)}</span></div>`;
+    h+=`<div class="bk-sum-r"><span>${lg==='en'?'City tourist tax':'Taxa municipal turística'}</span><span>${money(c.cityTax)}</span></div>
+      <div class="bk-sum-r sub"><span>${lg==='en'?('€2 x '+c.taxableGuests+' '+(c.taxableGuests===1?'adult':'adults')+' x '+c.taxNights+' '+(c.taxNights===1?'night':'nights')):('2€ x '+c.taxableGuests+' '+(c.taxableGuests===1?'adulto':'adultos')+' x '+c.taxNights+' '+(c.taxNights===1?'noite':'noites'))}</span><span></span></div>
+      <div class="bk-sum-r tot"><span>${lg==='en'?'Total stay':'Total da estadia'}</span><span>${money(c.total)}</span></div>
+      <div class="bk-sum-r dep"><span>${lg==='en'?'Deposit due now (30%)':'Sinal a pagar agora (30%)'}</span><span>${money(c.depositDueNow)}</span></div>
+      <div class="bk-sum-r bal"><span>${lg==='en'?'Balance at check-in':'Restante no check-in'}</span><span>${money(c.balanceAtCheckin)}</span></div>
+    </div>`;
+    return h;
+  }
+  function cap(s){ return s.charAt(0).toUpperCase()+s.slice(1); }
+
+  function trustChipsHTML(keys){
+    const map={bestPrice:'🏷️',securePayment:'🔒',freeCancellation:'✅',noHiddenFees:'🧾',instantConfirmation:'⚡',directHost:'💬'};
+    return keys.map(k=>`<span class="bk-chip" title="${t('trust.'+k+'.tip')}"><span class="ci">${map[k]}</span>${t('trust.'+k)}</span>`).join('');
+  }
+
+  /* ---- footer ---- */
+  function renderFoot(){
+    const f=document.getElementById('bk-foot'); if(!f) return;
+    if(S.step===5){ f.style.display='none'; return; } f.style.display='flex';
+    recalc();
+    const c=S.c;
+    let price='';
+    if(S.step>=2 && c && c.total){ price=`<div class="bk-foot-price"><div class="ft"><span class="tv" id="bk-foot-total" data-v="${prevTotal}">${money(c.total)}</span></div><div class="fd">${lg==='en'?'incl. taxes · ':'inclui taxas · '}<b>${money(c.depositDueNow)} ${lg==='en'?'deposit':'sinal'}</b></div></div>`; }
+    else { price=`<div class="bk-foot-price"><div class="fd">${S.nights>0?t(S.nights===1?'step1.nightsSingular':'step1.nightsLabel',{n:S.nights}):t('step1.datesPlaceholder')}</div></div>`; }
+    let back = S.step>1 ? `<button class="btn btn-sec" onclick="BK.back()">${t(S.step===2?'btn.backDates':(S.step===3?'btn.backRoom':'btn.backRate'))}</button>` : '<span></span>';
+    let nextLbl, nextAct='BK.next()';
+    if(S.step===1) nextLbl=t('btn.continueRoom');
+    else if(S.step===2) nextLbl=t('btn.continueRate');
+    else if(S.step===3) nextLbl=t('btn.continueDetails');
+    else if(S.step===4){ nextLbl = S.paymentMethod==='multibanco'?t('btn.generateMb'):t('btn.payDepositAmount',{amount:money(c.depositDueNow)}); nextAct='BK.pay()'; }
+    f.innerHTML=`${price}<div class="bk-foot-btns">${back}<button class="btn btn-primary" onclick="${nextAct}">${nextLbl}</button></div>`;
+    const tv=document.getElementById('bk-foot-total'); if(tv && c && c.total){ countUp(tv,c.total); prevTotal=c.total; }
+  }
+
+  /* ---- render dispatch ---- */
+  function render(){
+    document.getElementById('bk-title').textContent=t('modal.title');
+    document.getElementById('bk-sub').textContent=t('modal.subtitle');
+    document.getElementById('bk-demo').textContent=t('demo.banner');
+    document.getElementById('bk-close').setAttribute('aria-label',t('modal.close'));
+    renderSteps();
+    const body=document.getElementById('bk-body');
+    recalc();
+    if(S.step===1){ body.innerHTML=step1(); initCal(); }
+    else if(S.step===2){ body.innerHTML=step2(); }
+    else if(S.step===3){ body.innerHTML=step3(); }
+    else if(S.step===4){ body.innerHTML=step4(); }
+    else if(S.step===5){ body.innerHTML=confirmation(); runConfAnim(); }
+    body.scrollTop=0;
+    renderFoot();
+  }
+
+  /* ---- navigation + validation ---- */
+  function next(){
+    if(S.step===1){ if(S.nights<=0){ alert(t('err.sameDay')); return; } }
+    if(S.step===2){ if(!S.roomType){ flashFoot(t('err.noRoom')); return; } }
+    if(S.step<4){ S.step++; render(); }
+  }
+  function back(){ if(S.step>1){ S.step--; render(); } }
+  function flashFoot(msg){ alert(msg); }
+
+  function selectRoom(id){
+    const rt=roomById(id); if(minRoomsLeft(id)<=0) return;
+    if(S.adults>rt.maxAdults||S.children>rt.maxChildren){ alert(t('err.occupancy',{a:rt.maxAdults,c:rt.maxChildren})); return; }
+    S.roomType=id; recalc(); render();
+  }
+  function setRate(id){ if(S.ratePlan===id) return; S.ratePlan=id;
+    if(id==='nonrefundable' && S.promo&&S.promo.valid){ S.promo=null; }
+    recalc(); render(); }
+  function toggleExtra(id){ const i=S.extras.indexOf(id); if(i>=0) S.extras.splice(i,1); else S.extras.push(id); recalc(); render(); }
+  function applyPromo(){
+    const inp=document.getElementById('bk-promo-in'); const code=(inp.value||'').trim().toUpperCase();
+    const msg=document.getElementById('bk-promo-msg');
+    if(!code) return;
+    if(S.ratePlan==='nonrefundable'){ S.promo={code,valid:false,msg:DATA.promoCodes[0].errorMessage[lg]}; render(); return; }
+    const pc=DATA.promoCodes.find(p=>p.code===code);
+    if(!pc){ S.promo={code,valid:false,msg:DATA.promoCodes[0].errorMessage[lg]}; render(); return; }
+    if(pc.minNights && S.nights<pc.minNights){ S.promo={code,valid:false,msg:(pc.minNightsError?pc.minNightsError[lg]:pc.errorMessage[lg])}; render(); return; }
+    S.promo={code,valid:true,type:pc.type,value:pc.value,msg:pc.successMessage[lg]}; recalc(); render();
+  }
+  function removePromo(){ S.promo=null; recalc(); render(); }
+
+  function adults(d){ const n=S.adults+d; if(n<1||n>3) return; S.adults=n; if(S.roomType){ const rt=roomById(S.roomType); if(S.adults>rt.maxAdults) S.roomType=null; } recalc(); render(); }
+  function children(d){ const n=S.children+d; if(n<0||n>1) return; S.children=n; S.childAges=S.childAges.slice(0,n); while(S.childAges.length<n) S.childAges.push(8); recalc(); render(); }
+  function childAge(i,v){ S.childAges[i]=parseInt(v,10); recalc(); renderFoot(); }
+  function setPay(m){ readGuest(); S.paymentMethod=m; document.querySelectorAll('.bk-paytab').forEach(x=>x.classList.toggle('on',x.getAttribute('data-m')===m)); document.getElementById('bk-paypanel').innerHTML=payPanel(); renderFoot(); }
+
+  function readGuest(){
+    const g=S.guest;
+    const v=id=>{ const e=document.getElementById(id); return e?e.value.trim():''; };
+    g.fullName=v('g-name'); g.email=v('g-email'); g.phoneCode=v('g-code'); g.phone=v('g-phone');
+    g.country=v('g-country'); g.arrival=v('g-arrival'); g.requests=v('g-req');
+  }
+  function validateGuest(){
+    readGuest(); const g=S.guest; let ok=true, first=null;
+    function mark(f,bad){ const el=document.querySelector(`[data-f="${f}"]`); if(el){ el.classList.toggle('err',bad); if(bad&&!first) first=el; } if(bad) ok=false; }
+    mark('fullName', !(g.fullName && g.fullName.trim().split(/\s+/).length>=2));
+    mark('email', !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(g.email));
+    mark('phone', !(g.phone && g.phone.replace(/\D/g,'').length>=6));
+    mark('country', !g.country);
+    if(!ok && first) first.scrollIntoView({behavior:REDUCE?'auto':'smooth',block:'center'});
+    return ok;
+  }
+  function validatePay(){
+    let ok=true, first=null;
+    function mark(f,bad){ const el=document.querySelector(`[data-f="${f}"]`); if(el){ el.classList.toggle('err',bad); if(bad&&!first) first=el; } if(bad) ok=false; }
+    if(S.paymentMethod==='mbway'){ const p=(document.getElementById('p-mbphone')||{}).value||''; mark('mbphone', p.replace(/\D/g,'').length!==9); }
+    else if(S.paymentMethod==='card'){
+      const num=((document.getElementById('p-cardnum')||{}).value||'').replace(/\D/g,'');
+      const exp=((document.getElementById('p-exp')||{}).value||'');
+      const cvc=((document.getElementById('p-cvc')||{}).value||'').replace(/\D/g,'');
+      const nm=((document.getElementById('p-cardname')||{}).value||'').trim();
+      mark('cardNumber', num.length!==16); mark('cardExpiry', !/^\d{2}\/\d{2}$/.test(exp)); mark('cardCvc', cvc.length!==3); mark('cardName', nm.length<2);
+    }
+    if(!ok && first) first.scrollIntoView({behavior:REDUCE?'auto':'smooth',block:'center'});
+    return ok;
+  }
+  function fmtCard(el){ let v=el.value.replace(/\D/g,'').slice(0,16); el.value=v.replace(/(.{4})/g,'$1 ').trim();
+    const b=document.getElementById('p-brand'); if(b){ b.textContent = v[0]==='4'?'VISA':((v[0]==='5'||v[0]==='2')?'MASTERCARD':''); } }
+  function fmtExp(el){ let v=el.value.replace(/\D/g,'').slice(0,4); if(v.length>=3) v=v.slice(0,2)+'/'+v.slice(2); el.value=v; }
+
+  function pay(){
+    if(!validateGuest()){ S.step=4; return; }
+    if(S.paymentMethod!=='multibanco' && !validatePay()) return;
+    if(S.paymentMethod==='mbway') processOverlay('mbway',3500);
+    else if(S.paymentMethod==='card') processOverlay('card',2200);
+    else { S.paymentStatus='mb_pending'; S.bookingStatus='mb_pending'; finalizeRef(); S.step=5; render(); }
+  }
+  function processOverlay(kind,ms){
+    const body=document.getElementById('bk-body'); document.getElementById('bk-foot').style.display='none';
+    if(kind==='mbway') body.innerHTML=`<div class="bk-processing"><div class="bk-pulse-ring">MB WAY</div><p>${t('payment.mbway.status')}</p><p style="margin-top:6px">${t('payment.mbway.waiting')}</p></div>`;
+    else body.innerHTML=`<div class="bk-processing"><div class="bk-spin"></div><p>${t('payment.card.processing')}</p></div>`;
+    setTimeout(()=>{ S.paymentStatus='success'; S.bookingStatus='confirmed'; finalizeRef(); S.step=5; render(); }, REDUCE?900:ms);
+  }
+  function finalizeRef(){
+    const h=fnv(isoLocal(S.checkIn)+'|'+isoLocal(S.checkOut)+'|'+S.roomType+'|'+(S.adults+S.children));
+    S.bookingRef='INP-'+S.checkIn.getFullYear()+'-'+pad(h%100000,5);
+    S.mbRef=pad(h%1000000000,9);
+  }
+
+  /* ---- STEP 5 : confirmation ---- */
+  function confirmation(){
+    const c=S.c, rt=roomById(S.roomType); const guests=S.adults+S.children;
+    const pending=S.bookingStatus==='mb_pending';
+    let mbBlock='';
+    if(pending){
+      const grp=S.mbRef.replace(/(\d{3})(\d{3})(\d{3})/,'$1 $2 $3');
+      mbBlock=`<div class="bk-mbpend">
+        <div class="pend-badge">⏳ ${t('payment.mb.pending')}</div>
+        <div class="bk-paypanel" style="text-align:left">
+          <div class="bk-mb-row"><span>${t('payment.mb.entidade')}</span><b>${DATA.multibanco.entidade}</b></div>
+          <div class="bk-mb-row"><span>${t('payment.mb.referencia')}</span><b>${grp}</b></div>
+          <div class="bk-mb-row"><span>${t('payment.mb.valor')}</span><b>${money(c.depositDueNow)}</b></div>
+          <button class="bk-copybtn" onclick="BK.copy('${DATA.multibanco.entidade} ${grp}',this)">${t('payment.mb.copy')}</button>
+          <p class="bk-paydesc" style="margin:12px 0 0">${t('payment.mb.instruction')}</p>
+        </div>
+        <div style="text-align:center;margin-top:14px"><button class="btn btn-azu" onclick="BK.markPaid()">${t('payment.mb.demoMarkPaid')}</button></div>
+      </div>`;
+    }
+    const headline = pending? t('payment.mb.pending') : t('confirm.headline');
+    return `<div class="bk-conf">
+      <div class="bk-seal" id="bk-seal"><span class="ring"></span><svg viewBox="0 0 52 52"><path fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" d="M14 27 l8 8 l16 -18"/></svg></div>
+      <div class="bk-tiles" id="bk-tiles">${[ '#5e748a','#9a7b3f','#8a5a45','#9a7b3f','#5e748a'].map(c=>`<span class="bk-tile" style="background:${c}"></span>`).join('')}</div>
+      <h3>${pending?t('confirm.headline'):t('confirm.headline')}</h3>
+      <p class="csub">${pending?t('payment.mb.instruction'):t('confirm.subtext')}</p>
+      <div class="bk-refcard"><div class="rl">${t('confirm.refLabel')}</div><div class="rv">${S.bookingRef}</div></div>
+      <div><button class="bk-copyref" onclick="BK.copy('${S.bookingRef}',this)">${t('confirm.copyRef')}</button></div>
+      <div class="bk-confgrid">
+        <div class="bk-confcell"><div class="cl">${t('confirm.checkInLabel')}</div><div class="cv">${cap(fmtWeekday(S.checkIn))}, ${lg==='en'?fmtDateEn(S.checkIn):fmtDatePt(S.checkIn)}</div><div class="cn">${t('confirm.checkInNote')}</div></div>
+        <div class="bk-confcell"><div class="cl">${t('confirm.checkOutLabel')}</div><div class="cv">${cap(fmtWeekday(S.checkOut))}, ${lg==='en'?fmtDateEn(S.checkOut):fmtDatePt(S.checkOut)}</div><div class="cn">${t('confirm.checkOutNote')}</div></div>
+        <div class="bk-confcell"><div class="cl">${rt?rt.name[lg]:''}</div><div class="cv" style="font-size:.95rem">${t('confirm.occupancyLine',{guests:guests,nights:S.nights})}</div></div>
+        <div class="bk-confcell"><div class="cl">Total</div><div class="cv">${money(c.total)}</div><div class="cn">${t('confirm.depositPaid',{deposit:money(c.depositDueNow)})}</div></div>
+      </div>
+      ${pending?mbBlock:`<div class="bk-paidbox"><div class="pp">✓ ${t('confirm.depositPaid',{deposit:money(c.depositDueNow)})}</div><div class="pr">${t('confirm.remainder',{remainder:money(c.balanceAtCheckin)})}</div></div>`}
+      <div class="bk-next">
+        <div class="nt">${t('confirm.whatNext.title')}</div>
+        <div class="bk-nextrow"><div class="nn">1</div><div class="nb"><div class="nh">${t('confirm.next1.title')}</div><div class="nd">${t('confirm.next1.detail')}</div></div></div>
+        <div class="bk-nextrow"><div class="nn">2</div><div class="nb"><div class="nh">${t('confirm.next2.title')}</div><div class="nd">${t('confirm.next2.detail')}</div></div></div>
+        <div class="bk-nextrow"><div class="nn">3</div><div class="nb"><div class="nh">${t('confirm.next3.title')}</div><div class="nd">${t('confirm.next3.detail')}</div></div></div>
+      </div>
+      <div class="bk-confctas">
+        <button class="btn btn-primary" onclick="BK.ics()">📅 ${t('confirm.addToCalendar')}</button>
+        <a class="btn btn-azu" href="https://wa.me/${DATA.property.whatsappPath}?text=${encodeURIComponent(t('whatsapp.prefill',{ref:S.bookingRef}))}" target="_blank" rel="noopener">💬 ${t('confirm.whatsapp')}</a>
+        <button class="btn btn-sec" onclick="BK.close()">${t('btn.done')}</button>
+      </div>
+      <p class="bk-paydesc" style="text-align:center;margin-top:14px">${t('confirm.demoBanner')}</p>
+    </div>`;
+  }
+  function runConfAnim(){ if(REDUCE) return;
+    const seal=document.getElementById('bk-seal'); if(seal) seal.classList.add('go');
+    const tiles=document.querySelectorAll('#bk-tiles .bk-tile');
+    tiles.forEach((tl,i)=>{ tl.style.animationDelay=(0.12+i*0.08)+'s'; tl.classList.add('go'); });
+  }
+  function markPaid(){ S.bookingStatus='confirmed'; S.paymentStatus='success'; render(); }
+  function copy(txt,btn){ try{ navigator.clipboard.writeText(txt); const o=btn.textContent; btn.textContent=t('confirm.refCopied'); setTimeout(()=>btn.textContent=o,1600);}catch(e){} }
+  function ics(){
+    const dt=d=>d.getFullYear()+pad(d.getMonth()+1,2)+pad(d.getDate(),2);
+    const start=dt(S.checkIn)+'T150000', end=dt(S.checkOut)+'T110000';
+    const rt=roomById(S.roomType);
+    const room=(rt?(lg==='en'?rt.name.en:rt.name.pt):'').replace(/,/g,'');
+    const desc=(lg==='en'?('inPatio Guest House booking. Reference '+S.bookingRef+'. '+room):('Reserva inPatio Guest House. Referencia '+S.bookingRef+'. '+room));
+    const lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//inPatio//Booking//EN','BEGIN:VEVENT','UID:'+S.bookingRef+'@inpatio.pt','DTSTART:'+start,'DTEND:'+end,'SUMMARY:inPatio Guest House','LOCATION:Patio de Sao Salvador 22 Porto','DESCRIPTION:'+desc,'STATUS:CONFIRMED','END:VEVENT','END:VCALENDAR'];
+    const blob=new Blob([lines.join('\r\n')],{type:'text/calendar'}); const url=URL.createObjectURL(blob);
+    const a=document.createElement('a'); a.href=url; a.download='inpatio-'+S.bookingRef+'.ics'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),1000);
+  }
+
+  /* ---- public API ---- */
+  return {
+    init(){ /* nothing yet */ },
+    setLang(l){ lg=l; if(document.getElementById('modal').classList.contains('show')) render(); },
+    open(roomId){ lg=lang; S.step=1; scarSeen={}; if(roomId&&roomById(roomId)) S.roomType=roomId; recalc(); render(); document.getElementById('modal').classList.add('show'); },
+    close(){ document.getElementById('modal').classList.remove('show'); },
+    next, back, selectRoom, setRate, toggleExtra, applyPromo, removePromo,
+    adults, children, childAge, setPay, pay, fmtCard, fmtExp, markPaid, copy, ics
+  };
+})();
+window.BK=BK;
+function openBooking(roomId){ BK.open(roomId); }
+function closeBooking(){ BK.close(); }
+
+/* ---- init ---- */
 let saved='pt'; try{ saved=localStorage.getItem('inpatio_lang')||'pt'; }catch(e){}
-initPickers();
+initHeroPickers();
+BK.init();
 applyLang(saved);
 </script>
+
 </body>
 </html>
