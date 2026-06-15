@@ -33,7 +33,7 @@ p{margin:0 0 14px}
 a{color:var(--terra);text-decoration:none}
 .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
 .eyebrow{font-family:var(--fbody);font-weight:600;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.demo-tag{position:fixed;bottom:14px;right:14px;top:auto;z-index:80;background:var(--ink);color:#fff;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:6px 11px;border-radius:999px;opacity:.82;pointer-events:none}
+.demo-tag{position:fixed;bottom:14px;left:14px;top:auto;right:auto;z-index:70;background:var(--ink);color:#fff;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;padding:5px 10px;border-radius:999px;opacity:.8;pointer-events:none}
 .btn{display:inline-block;border:0;border-radius:var(--r-sm);font-family:var(--fbody);font-weight:600;font-size:15px;cursor:pointer;padding:13px 26px;transition:background .2s,transform .2s,box-shadow .2s;letter-spacing:.01em}
 .btn-primary{background:var(--terra);color:#fff;box-shadow:var(--sh-xs)}
 .btn-primary:hover{background:var(--terra-deep);transform:translateY(-1px);box-shadow:var(--sh-sm)}
@@ -155,13 +155,17 @@ section.blk.alt{background:var(--bg-alt)}
 .mbar .mp{font-family:var(--fdisp);color:var(--terra);font-size:1.2rem;font-weight:600}
 .mbar .mp small{font-family:var(--fbody);font-size:12px;color:var(--muted);font-weight:400}
 /* booking modal */
-.modal{display:none;position:fixed;inset:0;z-index:300;background:rgba(34,26,20,.5);backdrop-filter:blur(3px);overflow-y:auto;padding:24px}
-.modal.show{display:flex;align-items:flex-start;justify-content:center}
-.sheet{background:var(--bg);border-radius:var(--r-xl);max-width:760px;width:100%;margin:24px auto;box-shadow:var(--sh-lg);overflow:hidden}
-.sheethd{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;background:var(--surface);border-bottom:1px solid var(--line)}
-.sheethd h3{font-size:1.4rem}
-.x{border:0;background:transparent;font-size:26px;color:var(--muted);cursor:pointer;line-height:1}
-.steps{display:flex;gap:0;padding:18px 24px 4px}
+.modal{display:none;position:fixed;inset:0;z-index:300;background:rgba(28,21,16,.55);backdrop-filter:blur(5px);padding:20px}
+.modal.show{display:flex;align-items:center;justify-content:center;animation:mdFade .26s ease}
+.sheet{background:var(--bg);border-radius:var(--r-xl);max-width:680px;width:100%;max-height:92vh;display:flex;flex-direction:column;box-shadow:0 30px 70px rgba(28,21,16,.4);overflow:hidden}
+.modal.show .sheet{animation:mdIn .5s cubic-bezier(.16,1,.3,1)}
+@keyframes mdFade{from{opacity:0}to{opacity:1}}
+@keyframes mdIn{from{opacity:0;transform:translateY(30px) scale(.96)}to{opacity:1;transform:none}}
+.sheethd{flex:0 0 auto;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 24px;background:var(--surface);border-bottom:1px solid var(--line)}
+.sheethd h3{font-size:1.4rem;line-height:1.2}
+.x{flex:0 0 auto;border:0;background:transparent;font-size:24px;color:var(--muted);cursor:pointer;line-height:1;width:40px;height:40px;border-radius:999px;display:flex;align-items:center;justify-content:center;transition:background .2s,color .2s}
+.x:hover{background:var(--bg-alt);color:var(--ink)}
+.steps{flex:0 0 auto;display:flex;gap:0;padding:18px 24px 4px}
 .stp{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;font-size:12.5px;color:var(--muted2);position:relative;padding-bottom:6px;font-weight:600}
 .stp .n{position:relative;z-index:1;display:inline-flex;width:28px;height:28px;border-radius:999px;background:var(--line);color:var(--muted);align-items:center;justify-content:center;font-size:13px;margin-bottom:8px}
 .stp.on{color:var(--ink)} .stp.on .n{background:var(--terra);color:#fff}
@@ -169,8 +173,9 @@ section.blk.alt{background:var(--bg-alt)}
 .stp::after{content:"";position:absolute;top:14px;left:50%;width:100%;height:2px;background:var(--line);z-index:0}
 .stp:last-child::after{display:none}
 .stp.done::after{background:var(--success)}
-.sbody{padding:22px 24px}
-.step{display:none} .step.on{display:block}
+.sbody{flex:1 1 auto;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:22px 24px}
+.step{display:none} .step.on{display:block;animation:stepIn .34s ease}
+@keyframes stepIn{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:none}}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .rowsel{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--line2);border-radius:var(--r-md);padding:14px 16px;margin-bottom:12px;cursor:pointer;transition:border-color .2s,background .2s}
 .rowsel:hover{border-color:var(--stone)}
@@ -179,10 +184,15 @@ section.blk.alt{background:var(--bg-alt)}
 .paytabs{display:flex;gap:8px;margin:6px 0 14px}
 .paytab{flex:1;text-align:center;border:1px solid var(--line2);border-radius:var(--r-sm);padding:11px;cursor:pointer;font-size:14px;font-weight:600;color:var(--muted)}
 .paytab.on{border-color:var(--terra);background:var(--terra-tint);color:var(--terra-deep)}
-.summary{background:var(--card-warm);border:1px solid var(--line);border-radius:var(--r-md);padding:14px 16px;margin-top:6px}
-.summary .r{display:flex;justify-content:space-between;font-size:14.5px;margin:6px 0}
-.summary .r.tot{border-top:1px solid var(--line);margin-top:10px;padding-top:10px;font-weight:700;font-size:17px}
-.sfoot{display:flex;justify-content:space-between;gap:12px;padding:18px 24px;background:var(--surface);border-top:1px solid var(--line)}
+.summary{background:var(--card-warm);border:1px solid var(--line);border-radius:var(--r-md);padding:15px 17px;margin-top:6px}
+.summary .r{display:flex;justify-content:space-between;align-items:baseline;gap:14px;font-size:14.5px;margin:7px 0}
+.summary .r>span:last-child{text-align:right;white-space:nowrap;flex:0 0 auto}
+.summary .r>span:first-child{min-width:0}
+.summary .r.tot{border-top:1px solid var(--line);margin-top:11px;padding-top:11px;font-weight:700;font-size:17px}
+.summary .r.dep{color:var(--muted);font-size:12.5px}
+.summary .r.dep>span:last-child{white-space:normal;text-align:right}
+.sfoot{flex:0 0 auto;display:flex;justify-content:space-between;gap:12px;padding:16px 24px;background:var(--surface);border-top:1px solid var(--line)}
+.sfoot .btn{flex:0 0 auto}
 .pays{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
 .pays span{font-size:10px;font-weight:800;letter-spacing:.04em;border:1px solid var(--line);border-radius:var(--r-sm);padding:4px 7px;color:#555;background:#fff}
 .mbway{color:#e2001a;border-color:#f3c2c8}
@@ -201,7 +211,8 @@ section.blk.alt{background:var(--bg-alt)}
 /* reveal */
 .rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;will-change:opacity,transform}
 .rv.in{opacity:1;transform:none;will-change:auto}
-@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}*{scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}*{scroll-behavior:auto}
+  .modal.show,.modal.show .sheet,.step.on,.tick{animation:none!important}}
 /* responsive */
 @media(max-width:880px){
   .navlinks a:not(.lang-wrap):not(.navcta){display:none}
@@ -515,12 +526,12 @@ function openBooking(room,rate){ if(room){cur.room=room;cur.rate=rate;} step=1; 
 function closeBooking(){document.getElementById('modal').classList.remove('show')}
 function selRoom(el){document.querySelectorAll('.rowsel').forEach(r=>r.classList.remove('sel'));el.classList.add('sel');cur.room=el.dataset.room;cur.rate=+el.dataset.rate;render()}
 function payTab(el){document.querySelectorAll('.paytab').forEach(t=>t.classList.remove('on'));el.classList.add('on')}
-function summaryHTML(){const t=TX[lang],sub=cur.rate*cur.nights,dep=Math.round(sub*0.3),cur$=lang==='en'?`€${cur.rate}`:`${cur.rate}€`,sub$=lang==='en'?`€${sub}`:`${sub}€`;
+function summaryHTML(){const t=TX[lang],sub=cur.rate*cur.nights,dep=Math.round(sub*0.3),sub$=lang==='en'?`€${sub}`:`${sub}€`;
   return `<div class="r"><span>${t.roomLine(cur.room)}</span><span>${t.nights(cur.nights)}</span></div>
   <div class="r"><span>${t.rateLine(cur.rate,cur.nights)}</span><span>${sub$}</span></div>
   <div class="r"><span>${t.breakfast}</span><span style="color:var(--success)">${t.included}</span></div>
   <div class="r tot"><span>${t.total}</span><span>${sub$}</span></div>
-  <div class="r" style="color:var(--muted);font-size:13px"><span>${t.depToday}</span><span>${t.depRest(dep)}</span></div>`;}
+  <div class="r dep"><span>${t.depToday}</span><span>${t.depRest(dep)}</span></div>`;}
 function render(){
   [1,2,3,4].forEach(n=>{document.getElementById('step'+n).classList.toggle('on',n===step)});
   [1,2,3].forEach(n=>{const s=document.getElementById('st'+n);s.classList.toggle('on',n===step);s.classList.toggle('done',n<step)});
