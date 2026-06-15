@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="img/hero.webp" fetchpriority="high">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="vendor/flatpickr.min.css">
 <style>
 :root{
   --bg:#f7f2ea; --bg-alt:#f1eadd; --surface:#fcfaf5; --card:#fffdf9; --card-warm:#fbf7f0;
@@ -229,6 +230,65 @@ section.blk.alt{background:var(--bg-alt)}
   .demo-tag{bottom:76px;left:12px;right:auto}
 }
 @media(max-width:520px){ .footgrid{grid-template-columns:1fr} .navcta{display:none} }
+
+/* ---- extra modal motion ---- */
+.step.on{animation:none}
+.step.on>*{animation:childIn .5s cubic-bezier(.16,1,.3,1) backwards}
+.step.on>*:nth-child(1){animation-delay:.03s}
+.step.on>*:nth-child(2){animation-delay:.09s}
+.step.on>*:nth-child(3){animation-delay:.15s}
+.step.on>*:nth-child(4){animation-delay:.21s}
+.step.on>*:nth-child(5){animation-delay:.27s}
+@keyframes childIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.stp .n{transition:transform .3s,background .3s,color .3s}
+.stp.on .n{animation:nPop .42s ease}
+@keyframes nPop{0%{transform:scale(.62)}58%{transform:scale(1.16)}100%{transform:scale(1)}}
+.stp::after{transition:background .45s ease}
+.rowsel:active{transform:scale(.992)}
+.paytab{transition:border-color .2s,background .2s,color .2s,transform .15s}
+.paytab:active{transform:scale(.97)}
+.btn:active{transform:translateY(0) scale(.985)}
+.x:active{transform:scale(.92)}
+.summary .r.tot span:last-child{display:inline-block;transform-origin:right center}
+.summary .r.tot span.pulse{animation:totPulse .55s cubic-bezier(.16,1,.3,1)}
+@keyframes totPulse{0%{transform:scale(1);color:var(--ink)}45%{transform:scale(1.14);color:var(--terra)}100%{transform:scale(1);color:var(--ink)}}
+
+/* ---- flatpickr · brand theme ---- */
+.cal-input{display:none}
+#cal-wrap{display:flex;justify-content:center}
+.flatpickr-calendar{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh-md);font-family:var(--fbody)}
+.flatpickr-calendar.inline{box-shadow:var(--sh-xs);margin:2px auto 0;width:100%;max-width:336px;padding:6px 6px 10px}
+.flatpickr-calendar.arrowTop:before,.flatpickr-calendar.arrowTop:after,.flatpickr-calendar.arrowBottom:before,.flatpickr-calendar.arrowBottom:after{display:none}
+.flatpickr-months{padding:6px 4px 2px}
+.flatpickr-months .flatpickr-month{color:var(--ink);height:38px}
+.flatpickr-current-month{font-size:108%;padding-top:5px}
+.flatpickr-current-month .cur-month,.flatpickr-current-month input.cur-year{font-family:var(--fdisp);font-weight:600;color:var(--ink)}
+.flatpickr-current-month .flatpickr-monthDropdown-months{font-family:var(--fdisp);font-weight:600;color:var(--ink);font-size:1.05rem}
+.flatpickr-current-month .flatpickr-monthDropdown-months:hover{background:var(--terra-tint)}
+.flatpickr-weekdays{margin-top:4px}
+span.flatpickr-weekday{color:var(--muted);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em}
+.flatpickr-months .flatpickr-prev-month,.flatpickr-months .flatpickr-next-month{padding:8px 10px;border-radius:var(--r-sm);transition:background .2s}
+.flatpickr-months .flatpickr-prev-month:hover,.flatpickr-months .flatpickr-next-month:hover{background:var(--terra-tint)}
+.flatpickr-months .flatpickr-prev-month svg,.flatpickr-months .flatpickr-next-month svg{fill:var(--terra)}
+.flatpickr-months .flatpickr-prev-month:hover svg,.flatpickr-months .flatpickr-next-month:hover svg{fill:var(--terra-deep)}
+.flatpickr-day{color:var(--ink-soft);border:1px solid transparent;border-radius:var(--r-sm);max-width:38px;height:38px;line-height:37px;transition:background .15s,color .15s,border-color .15s,box-shadow .15s}
+.flatpickr-day:hover,.flatpickr-day:focus{background:var(--terra-tint);border-color:transparent;color:var(--terra-deep)}
+.flatpickr-day.today{border-color:var(--azu);color:var(--azu-deep);font-weight:600}
+.flatpickr-day.today:hover{background:var(--azu-light);color:var(--azu-deep)}
+.flatpickr-day.selected,.flatpickr-day.startRange,.flatpickr-day.endRange,
+.flatpickr-day.selected:hover,.flatpickr-day.startRange:hover,.flatpickr-day.endRange:hover{
+  background:var(--terra);border-color:var(--terra);color:#fff;box-shadow:none;font-weight:600}
+.flatpickr-day.startRange{border-radius:var(--r-sm) 0 0 var(--r-sm)}
+.flatpickr-day.endRange{border-radius:0 var(--r-sm) var(--r-sm) 0}
+.flatpickr-day.inRange{background:var(--terra-tint);border-color:var(--terra-tint);color:var(--terra-deep);
+  box-shadow:-6px 0 0 var(--terra-tint),6px 0 0 var(--terra-tint)}
+.flatpickr-day.flatpickr-disabled,.flatpickr-day.prevMonthDay,.flatpickr-day.nextMonthDay{color:var(--muted2);opacity:.55}
+.flatpickr-day.flatpickr-disabled,.flatpickr-day.flatpickr-disabled:hover{color:var(--line2);background:transparent;cursor:not-allowed}
+.numInputWrapper span.arrowUp:after{border-bottom-color:var(--terra)}
+.numInputWrapper span.arrowDown:after{border-top-color:var(--terra)}
+.flatpickr-day.inRange,.flatpickr-day.prevMonthDay.inRange,.flatpickr-day.nextMonthDay.inRange{box-shadow:-6px 0 0 var(--terra-tint),6px 0 0 var(--terra-tint)}
+.cal-hint{text-align:center;font-size:13px;color:var(--muted);margin:10px 0 0}
+@media (prefers-reduced-motion:reduce){.step.on>*,.stp.on .n,.summary .r.tot span.pulse{animation:none!important}}
 </style>
 </head>
 <body>
@@ -266,8 +326,8 @@ section.blk.alt{background:var(--bg-alt)}
 <div class="search rv">
   <div class="lab" data-en="Check availability for your dates">Veja se há vaga para as suas datas</div>
   <div class="searchrow">
-    <div class="fld"><label data-en="Check-in">Data de entrada</label><input type="date" id="ci" value="2026-07-10"></div>
-    <div class="fld"><label data-en="Check-out">Data de saída</label><input type="date" id="co" value="2026-07-13"></div>
+    <div class="fld"><label data-en="Check-in">Data de entrada</label><input type="text" id="ci" readonly placeholder="10/07/2026"></div>
+    <div class="fld"><label data-en="Check-out">Data de saída</label><input type="text" id="co" readonly placeholder="13/07/2026"></div>
     <div class="fld"><label data-en="Guests">Hóspedes</label>
       <select id="g"><option data-en="1 adult">1 adulto</option><option selected data-en="2 adults">2 adultos</option><option data-en="2 adults + 1 child">2 adultos + 1 criança</option></select>
     </div>
@@ -410,11 +470,10 @@ section.blk.alt{background:var(--bg-alt)}
     </div>
     <div class="sbody">
       <div class="step on" id="step1">
-        <div class="grid2">
-          <div class="fld"><label data-en="Check-in">Data de entrada</label><input type="date" id="mci" value="2026-07-10"></div>
-          <div class="fld"><label data-en="Check-out">Data de saída</label><input type="date" id="mco" value="2026-07-13"></div>
-        </div>
-        <div class="fld" style="margin-top:12px"><label data-en="Guests">Hóspedes</label>
+        <label style="display:block;font-size:14px;font-weight:500;color:var(--muted);margin-bottom:8px" data-en="Choose your dates">Escolha as suas datas</label>
+        <div id="cal-wrap"><input class="cal-input" id="cal" type="text"></div>
+        <p class="cal-hint" data-en="Tap your check-in date, then your check-out.">Toque na data de entrada e depois na de saída.</p>
+        <div class="fld" style="margin-top:16px"><label data-en="Guests">Hóspedes</label>
           <select id="mg"><option data-en="1 adult">1 adulto</option><option selected data-en="2 adults">2 adultos</option><option data-en="2 adults + 1 child">2 adultos + 1 criança</option></select></div>
         <p class="helper" id="nightsNote" style="margin-top:14px"></p>
       </div>
@@ -469,6 +528,8 @@ section.blk.alt{background:var(--bg-alt)}
   <span class="nav next" onclick="lbStep(1)">›</span>
 </div>
 
+<script src="vendor/flatpickr.min.js"></script>
+<script src="vendor/flatpickr-pt.js"></script>
 <script>
 // ---------- i18n ----------
 let lang='pt';
@@ -499,7 +560,7 @@ function applyLang(l){
     el.setAttribute('placeholder', lang==='en'?el.dataset.enPh:el.dataset.ptPh);
   });
   document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.lang===lang));
-  setNightsNote(); render();
+  setPickerLocale(); setNightsNote(); render();
   try{ localStorage.setItem('inpatio_lang',lang); }catch(e){}
 }
 document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>applyLang(b.dataset.lang)));
@@ -520,11 +581,28 @@ function lbStep(d){lbI=(lbI+d+lbImgs.length)%lbImgs.length;document.getElementBy
 function closeLb(){document.getElementById('lb').classList.remove('show')}
 
 // ---------- booking flow ----------
-let cur={room:'Standard',rate:135,nights:3},step=1;
-function setNightsNote(){const el=document.getElementById('nightsNote');if(el)el.textContent=TX[lang].nightsNote(cur.nights);}
+let cur={room:'Standard',rate:135,nights:3,ci:new Date(2026,6,10),co:new Date(2026,6,13)},step=1;
+const MO={pt:['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'],
+          en:['January','February','March','April','May','June','July','August','September','October','November','December']};
+function fmtRange(d1,d2){ if(!d1||!d2) return ''; const a=d1.getDate(),b=d2.getDate(),m=MO[lang];
+  if(d1.getMonth()===d2.getMonth()) return lang==='en'?`${a} to ${b} ${m[d2.getMonth()]}`:`${a} a ${b} de ${m[d2.getMonth()]}`;
+  return lang==='en'?`${a} ${m[d1.getMonth()]} to ${b} ${m[d2.getMonth()]}`:`${a} de ${m[d1.getMonth()]} a ${b} de ${m[d2.getMonth()]}`; }
+function setNightsNote(){const el=document.getElementById('nightsNote'); if(el) el.textContent = TX[lang].nights(cur.nights)+' · '+fmtRange(cur.ci,cur.co);}
+function pulseTotals(){document.querySelectorAll('.summary .r.tot span:last-child').forEach(s=>{s.classList.remove('pulse');void s.offsetWidth;s.classList.add('pulse');});}
+let pickers=[],calFp=null;
+function calChange(sel){ if(sel&&sel.length===2){ cur.ci=sel[0]; cur.co=sel[1]; cur.nights=Math.max(1,Math.round((sel[1]-sel[0])/864e5)); setNightsNote(); render(); pulseTotals(); } }
+function setPickerLocale(){ if(typeof flatpickr==='undefined') return; const loc=lang==='pt'?(flatpickr.l10ns.pt||flatpickr.l10ns.default):flatpickr.l10ns.default; pickers.forEach(p=>{try{p.set('locale',loc);}catch(e){}}); }
+function initPickers(){ if(typeof flatpickr==='undefined') return;
+  calFp=flatpickr('#cal',{inline:true,mode:'range',minDate:'2026-06-16',defaultDate:['2026-07-10','2026-07-13'],onReady:(s)=>calChange(s),onChange:(s)=>calChange(s)});
+  pickers.push(calFp);
+  const co=flatpickr('#co',{minDate:'2026-06-16',defaultDate:'2026-07-13',dateFormat:'d/m/Y'});
+  const ci=flatpickr('#ci',{minDate:'2026-06-16',defaultDate:'2026-07-10',dateFormat:'d/m/Y',onChange:(s)=>{ if(s[0]&&co) co.set('minDate',s[0]); }});
+  pickers.push(ci,co);
+  setPickerLocale();
+}
 function openBooking(room,rate){ if(room){cur.room=room;cur.rate=rate;} step=1; render(); document.getElementById('modal').classList.add('show'); }
 function closeBooking(){document.getElementById('modal').classList.remove('show')}
-function selRoom(el){document.querySelectorAll('.rowsel').forEach(r=>r.classList.remove('sel'));el.classList.add('sel');cur.room=el.dataset.room;cur.rate=+el.dataset.rate;render()}
+function selRoom(el){document.querySelectorAll('.rowsel').forEach(r=>r.classList.remove('sel'));el.classList.add('sel');cur.room=el.dataset.room;cur.rate=+el.dataset.rate;render();pulseTotals()}
 function payTab(el){document.querySelectorAll('.paytab').forEach(t=>t.classList.remove('on'));el.classList.add('on')}
 function summaryHTML(){const t=TX[lang],sub=cur.rate*cur.nights,dep=Math.round(sub*0.3),sub$=lang==='en'?`€${sub}`:`${sub}€`;
   return `<div class="r"><span>${t.roomLine(cur.room)}</span><span>${t.nights(cur.nights)}</span></div>
@@ -549,6 +627,7 @@ function back(){ if(step>1){step--;render()} }
 
 // ---------- init ----------
 let saved='pt'; try{ saved=localStorage.getItem('inpatio_lang')||'pt'; }catch(e){}
+initPickers();
 applyLang(saved);
 </script>
 </body>
