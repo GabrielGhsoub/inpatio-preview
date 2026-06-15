@@ -512,8 +512,13 @@ span.flatpickr-weekday{color:var(--muted);font-weight:600;font-size:11.5px;text-
   .bk-paytabs{flex-wrap:wrap}
   .bk-confgrid{grid-template-columns:1fr}
   .modal .stp span{display:none}
-  .bk-foot-price .ft{font-size:1.15rem}
+  .bk-foot-price .ft{font-size:1.1rem}
   .bk-sheet{max-width:100%}
+  .bk-foot{flex-wrap:wrap;gap:9px}
+  .bk-foot-price{flex:1 1 100%;flex-direction:row;gap:8px;align-items:baseline}
+  .bk-foot-price .fd{font-size:11px}
+  .bk-foot-btns{flex:1 1 100%;justify-content:stretch;gap:9px}
+  .bk-foot-btns .btn{flex:1;padding:13px 10px;text-align:center}
 }
 
 </style>
@@ -909,7 +914,7 @@ const BK = (function(){
       let barColor=DATA.lowAvailabilityIndicator.colors.comfortable_3plus;
       let badge='';
       if(sold){ badge=`<span class="rleft" style="background:${DATA.lowAvailabilityIndicator.colors.soldOut_disabled}">${DATA.lowAvailabilityIndicator.soldOut[lg]}</span>`; barColor=DATA.lowAvailabilityIndicator.colors.soldOut_disabled; }
-      else if(left<=2){ barColor=DATA.lowAvailabilityIndicator.colors.low_1to2; badge=`<span class="rleft" style="background:${barColor}">${left===1?DATA.lowAvailabilityIndicator.singular[lg]:DATA.lowAvailabilityIndicator.plural[lg].replace('{n}',left)}</span>`; }
+      else if(left<=2){ barColor=left===1?DATA.lowAvailabilityIndicator.colors.low_1to2:DATA.lowAvailabilityIndicator.colors.comfortable_3plus; badge=`<span class="rleft" style="background:${barColor}">${left===1?DATA.lowAvailabilityIndicator.singular[lg]:DATA.lowAvailabilityIndicator.plural[lg].replace('{n}',left)}</span>`; }
       cards+=`<div class="bk-room ${S.roomType===rt.id?'sel':''} ${dis?'dis':''}">
         <div class="bk-check">✓</div>
         <div class="rimg"><img src="img/${rt.image}" alt="" loading="lazy" decoding="async">${badge}</div>
